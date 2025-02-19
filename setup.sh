@@ -7,7 +7,7 @@ check_nix_installed() {
 
 if ! check_nix_installed; then
   echo "Nix is not installed. Installing ..."
-  sh <(curl -L https://nixos.org/nix/install)
+  sh <(curl -L https://nixos.org/nix/install) --daemon
 
   # Source Nix environment after installation
   if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
