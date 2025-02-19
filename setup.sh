@@ -46,9 +46,8 @@ ln -s "$PWD"/config.nix "$XDG_CONFIG_HOME"/nixpkgs/config.nix
 # Symlink the tmux configuration file
 ln -s "$PWD"/tmux.conf "$HOME"/.tmux.conf
 
-# Reload zsh
-#source "$HOME"/.zshrc
-exec zsh -l
-
 # Install Nix packages from config.nix
+echo "Installing Nix packages ..."
 nix-env -iA nixpkgs.myPackages
+
+echo "Setup complete"
