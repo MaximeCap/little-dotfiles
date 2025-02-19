@@ -1,10 +1,8 @@
-#!/bin/zsh
-
-exec zsh
+#!/bin/bash
 
 ## Useful method
 check_nix_installed() {
-  command -v nix >/dev/nulk 2>&1
+  command -v nix >/dev/null 2>&1
 }
 
 if ! check_nix_installed; then
