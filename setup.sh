@@ -13,6 +13,11 @@ if ! check_nix_installed; then
   if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
     . ~/.nix-profile/etc/profile.d/nix.sh
   fi
+
+  # For multi-user installations, source daemon environment
+  if [ -e /etc/profile.d/nix.sh ]; then
+    . /etc/profile.d/nix.sh
+  fi
 fi
 
 # Configure the home directory
