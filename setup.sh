@@ -8,6 +8,11 @@ check_nix_installed() {
 if ! check_nix_installed; then
   echo "Nix is not installed. Installing ..."
   sh <(curl -L https://nixos.org/nix/install)
+
+  # Source Nix environment after installation
+  if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
+    . ~/.nix-profile/etc/profile.d/nix.sh
+  fi
 fi
 
 # Configure the home directory
