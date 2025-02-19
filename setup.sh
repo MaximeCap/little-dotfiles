@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/zsh
+
+exec zsh
 
 ## Useful method
 check_nix_installed() {
