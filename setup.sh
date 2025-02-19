@@ -40,16 +40,16 @@ mkdir -p "$XDG_CONFIG_HOME"/nixpkgs
 
 echo "Symlinking the configuration files ..."
 
-# Backup the existing zshrc file
-mv "$HOME"/.zshrc "$HOME"/.zshrc.bak
+# Backup the existing zshrc file if it exists
+[ -f "$HOME"/.zshrc ] && mv "$HOME"/.zshrc "$HOME"/.zshrc.bak
 # Symlink the zshrc configuration file and force it if it exists
-ln -s "$PWD"/.zshrc "$HOME"/.zshrc
+ln -sf "$PWD"/.zshrc "$HOME"/.zshrc
 # Symlink the nvim configuration file
-ln -s "$PWD"/nvim "$XDG_CONFIG_HOME"/nvim
+ln -sf "$PWD"/nvim "$XDG_CONFIG_HOME"/nvim
 # Symlink the nix configuration file
-ln -s "$PWD"/config.nix "$XDG_CONFIG_HOME"/nixpkgs/config.nix
+ln -sf "$PWD"/config.nix "$XDG_CONFIG_HOME"/nixpkgs/config.nix
 # Symlink the tmux configuration file
-ln -s "$PWD"/tmux.conf "$HOME"/.tmux.conf
+ln -sf "$PWD"/tmux.conf "$HOME"/.tmux.conf
 
 # Install Nix packages from config.nix
 echo "Installing Nix packages ..."
