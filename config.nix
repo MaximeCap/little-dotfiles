@@ -13,6 +13,7 @@
         kubectl
         fnm
         tmux
+        oh-my-posh
       ];
     };
   };

@@ -28,6 +28,8 @@ echo "Creating the necessary folders ..."
 mkdir -p "$XDG_CONFIG_HOME"
 # Create the folder for nixpkgs
 mkdir -p "$XDG_CONFIG_HOME"/nixpkgs
+# Create the oh-my-posh folder
+mkdir -p "$XDG_CONFIG_HOME"/oh-my-posh
 
 #############################################
 ###### Symlinking ###########################
@@ -45,9 +47,12 @@ ln -sf "$PWD"/nvim "$XDG_CONFIG_HOME"/nvim
 ln -sf "$PWD"/config.nix "$XDG_CONFIG_HOME"/nixpkgs/config.nix
 # Symlink the tmux configuration file
 ln -sf "$PWD"/tmux.conf "$HOME"/.tmux.conf
+# Symlink the oh-my-posh configuration file
+ln -sf "$PWD"/max-omp.toml "$XDG_CONFIG_HOME"/oh-my-posh/max-omp.toml
 
 # Install Nix packages from config.nix
 echo "Installing Nix packages ..."
 nix-env -iA nixpkgs.myPackages
 
-echo "Setup complete"
+echo "Setup complete ! Starting zsh"
+zsh
