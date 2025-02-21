@@ -71,6 +71,7 @@ alias config="/usr/bin/git --git-dir=${HOME}/dotfiles/ --work-tree=${HOME}"
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/max.omp.toml)"
 
 [ -s "/Users/maxime.cappellen.e/.jabba/jabba.sh" ] && source "/Users/maxime.cappellen.e/.jabba/jabba.sh"
 
