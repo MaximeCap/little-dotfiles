@@ -31,6 +31,9 @@ mkdir -p "$XDG_CONFIG_HOME"/nixpkgs
 # Create the oh-my-posh folder
 mkdir -p "$XDG_CONFIG_HOME"/ohmyposh
 
+# Create the folder for zsh completion
+mkdir -p "$XDG_CONFIG_HOME"/.zsh/completions
+
 #############################################
 ###### Symlinking ###########################
 #############################################

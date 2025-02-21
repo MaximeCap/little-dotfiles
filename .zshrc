@@ -27,6 +27,7 @@ zinit light Aloxaf/fzf-tab
 # zinit snippet OMZP::kubectx
 
 # Load completions
+fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q

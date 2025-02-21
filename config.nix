@@ -14,6 +14,7 @@
         fnm
         tmux
         oh-my-posh
+        devpod
       ];
     };
   };
