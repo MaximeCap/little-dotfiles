@@ -29,7 +29,7 @@ mkdir -p "$XDG_CONFIG_HOME"
 # Create the folder for nixpkgs
 mkdir -p "$XDG_CONFIG_HOME"/nixpkgs
 # Create the oh-my-posh folder
-mkdir -p "$XDG_CONFIG_HOME"/oh-my-posh
+mkdir -p "$XDG_CONFIG_HOME"/ohmyposh
 
 #############################################
 ###### Symlinking ###########################
@@ -54,5 +54,4 @@ ln -sf "$PWD"/max.omp.toml "$XDG_CONFIG_HOME"/ohmyposh/max.omp.toml
 echo "Installing Nix packages ..."
 nix-env -iA nixpkgs.myPackages
 
-echo "Setup complete ! Starting zsh"
-zsh
+echo "Setup complete"
