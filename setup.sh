@@ -48,7 +48,7 @@ ln -sf "$PWD"/config.nix "$XDG_CONFIG_HOME"/nixpkgs/config.nix
 # Symlink the tmux configuration file
 ln -sf "$PWD"/tmux.conf "$HOME"/.tmux.conf
 # Symlink the oh-my-posh configuration file
-ln -sf "$PWD"/max-omp.toml "$XDG_CONFIG_HOME"/oh-my-posh/max-omp.toml
+ln -sf "$PWD"/max-omp.toml "$XDG_CONFIG_HOME"/ohmyposh/max-omp.toml
 
 # Install Nix packages from config.nix
 echo "Installing Nix packages ..."
