@@ -95,7 +95,7 @@ export IS_THALES=false
 # alias
 alias k="kubectl"
 alias n="nvim"
-alias l="ll"
+alias ll="ls -la"
 alias lg="lazygit"
 
 
