@@ -6,7 +6,6 @@
         fzf
         zoxide
         neovim
-        oh-my-posh
         fd
         ripgrep
         lazygit
@@ -15,6 +14,7 @@
         tmux
         oh-my-posh
         devpod
+        zellij
       ];
     };
   };

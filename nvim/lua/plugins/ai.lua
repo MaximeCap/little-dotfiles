@@ -1,36 +1,5 @@
 return {
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    enabled = function()
-      local isThales = vim.fn.getenv("IS_THALES")
-
-      if isThales == "true" then
-        return false
-      else
-        return true
-      end
-    end,
-    build = ":Copilot auth",
-    opts = {
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        keymap = {
-          accept = "<C-CR>",
-        },
-      },
-      panel = { enabled = true },
-      filetypes = {
-        markdown = true,
-        help = true,
-        ["*"] = true,
-        -- Add more filetypes as needed
-      },
-    },
-  },
-  {
     "milanglacier/minuet-ai.nvim",
     enabled = function()
       local isThales = vim.fn.getenv("IS_THALES")

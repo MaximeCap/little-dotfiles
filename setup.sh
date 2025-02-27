@@ -30,6 +30,8 @@ mkdir -p "$XDG_CONFIG_HOME"
 mkdir -p "$XDG_CONFIG_HOME"/nixpkgs
 # Create the oh-my-posh folder
 mkdir -p "$XDG_CONFIG_HOME"/ohmyposh
+# Create the zellij folder
+mkdir -p "$XDG_CONFIG_HOME"/zellij
 
 # Create the folder for zsh completion
 mkdir -p "$XDG_CONFIG_HOME"/.zsh/completions
@@ -52,6 +54,8 @@ ln -sf "$PWD"/config.nix "$XDG_CONFIG_HOME"/nixpkgs/config.nix
 ln -sf "$PWD"/tmux.conf "$HOME"/.tmux.conf
 # Symlink the oh-my-posh configuration file
 ln -sf "$PWD"/max.omp.toml "$XDG_CONFIG_HOME"/ohmyposh/max.omp.toml
+# Symlink the zellij configuration file
+ln -sf "$PWD"/config.kdl "$XDG_CONFIG_HOME"/zellij/config.kdl
 
 # Install Nix packages from config.nix
 echo "Installing Nix packages ..."
