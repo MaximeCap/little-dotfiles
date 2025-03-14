@@ -6,9 +6,9 @@ return {
     opts = {
       vendors = {
         ["taslgpt"] = {
-          __inherit_from = "openai",
-          endpoint = "http://localhost:11434/v1/chat/completions",
-          model = "",
+          __inherited_from = "openai",
+          endpoint = "http://localhost:11434/v1",
+          model = "llama3.1:8b",
           api_key_name = "",
           disable_tools = true,
         },
@@ -18,7 +18,7 @@ return {
       },
       -- add any opts here
       -- for example
-      provider = "copilot",
+      provider = vim.env.COPILOT,
       file_selector = { provider = "snacks" },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
