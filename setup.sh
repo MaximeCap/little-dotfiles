@@ -36,6 +36,9 @@ mkdir -p "$XDG_CONFIG_HOME"/zellij
 # Create the folder for zsh completion
 mkdir -p "$XDG_CONFIG_HOME"/.zsh/completions
 
+# Create local .zshrc.local for fine tunning
+[ -f "$HOME"/.zshrc.local ] || touch $HOME/.zshrc.local
+
 #############################################
 ###### Symlinking ###########################
 #############################################
