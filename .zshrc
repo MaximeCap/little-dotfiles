@@ -1,7 +1,7 @@
 # My Zshrc Config
 
 #eval "$(/opt/homebrew/bin/brew shellenv)"
-if [ -e /home/max/.nix-profile/etc/profile.d/nix.sh ]; then . /home/max/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+# if [ -e /home/max/.nix-profile/etc/profile.d/nix.sh ]; then . /home/max/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -58,12 +58,6 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# go
-# export GOPATH=$HOME/golang
-# export GOROOT="$(brew --prefix golang)/libexec"
-# export PATH=$PATH:$GOPATH/bin
-# export PATH=$PATH:$GOROOT/bin
-
 # Aliases
 alias ls='ls --color'
 #alias air=$(go env GOPATH)/bin/air
@@ -90,7 +84,8 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="/Users/maxime.cappellen.e/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
-export IS_THALES=false
+export VISUAL=nvim
+export EDITOR=nvim
 
 # alias
 alias k="kubectl"
@@ -98,4 +93,5 @@ alias n="nvim"
 alias ll="ls -la"
 alias lg="lazygit"
 
+source ~/.zshrc.local
 
