@@ -40,6 +40,11 @@ return {
         nerd_font_variant = "mono",
       },
       completion = {
+        list = {
+          selection = {
+            preselect = false,
+          },
+        },
         accept = {
           -- experimental auto-brackets support
           auto_brackets = {
