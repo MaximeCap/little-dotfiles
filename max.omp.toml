@@ -7,42 +7,43 @@ type = "prompt"
 alignment = "left"
 newline = true
 
-  [[blocks.segments]]
-  type = "path"
-  style = "plain"
-  powerline_symbol = ""
-  foreground = "#ffffff"
-  background = "transparent"
-  template = '{{ .Path }}'
+[[blocks.segments]]
+type = "path"
+style = "plain"
+powerline_symbol = ""
+foreground = "#ffffff"
+background = "transparent"
+template = '{{ .Path }}'
 
-    [blocks.segments.properties]
-    style = "full"
+[blocks.segments.properties]
+style = "full"
 
-  [[blocks.segments]]
-  type = "git"
-  style = "plain"
-  background = "transparent"
-  template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
+[[blocks.segments]]
+type = "git"
+style = "plain"
+background = "transparent"
+template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
 
-    [blocks.segments.properties]
-      branch_icon = ''
-      commit_icon = '@'
-      fetch_status = true
+[blocks.segments.properties]
+branch_icon = ''
+commit_icon = '@'
+fetch_status = true
+fetch_upstream_icon = true
 
 [[blocks]]
-  type = "prompt"
-  alignment = "left"
-  newline = true
+type = "prompt"
+alignment = "left"
+newline = true
 
-  [[blocks.segments]]
-    type = "text"
-    style = "plain"
-    template = '☀'
-    background = "transparent"
-    foreground_templates = [
-      "{{ if gt .Code 0}}red{{end}}",
-      "{{ if eq .Code 0}}white{{end}}"
-    ]
+[[blocks.segments]]
+type = "text"
+style = "plain"
+template = '☀'
+background = "transparent"
+foreground_templates = [
+  "{{ if gt .Code 0}}red{{end}}",
+  "{{ if eq .Code 0}}white{{end}}",
+]
 
 [transient_prompt]
 foreground = "magenta"

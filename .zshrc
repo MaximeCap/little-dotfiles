@@ -1,5 +1,7 @@
 # My Zshrc Config
 
+#zmodload zsh/zprof
+
 #eval "$(/opt/homebrew/bin/brew shellenv)"
 # if [ -e /home/max/.nix-profile/etc/profile.d/nix.sh ]; then . /home/max/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
@@ -29,7 +31,7 @@ zinit light Aloxaf/fzf-tab
 
 # Load completions
 fpath=(~/.zsh/completions $fpath)
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -C
 
 zinit cdreplay -q
 
@@ -66,6 +68,7 @@ alias ls='ls --color'
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/max.omp.toml)"
+eval "$(fnm env --use-on-cd --shell zsh)"
 
 [ -s "/Users/maxime.cappellen.e/.jabba/jabba.sh" ] && source "/Users/maxime.cappellen.e/.jabba/jabba.sh"
 
@@ -76,9 +79,9 @@ eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/max.omp.toml)"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/maxime.cappellen.e/.rd/bin:$PATH"
@@ -95,3 +98,15 @@ alias lg="lazygit"
 
 source ~/.zshrc.local
 
+# End timing
+# unsetopt XTRACE
+# exec 2>&3 3>& --async-
+
+# fnm
+FNM_PATH="/Users/maxime.cappellen.e/Library/Application Support/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/Users/maxime.cappellen.e/Library/Application Support/fnm:$PATH"
+  eval "`fnm env`"
+fi
+
+#zprof

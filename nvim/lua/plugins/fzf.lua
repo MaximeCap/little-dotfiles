@@ -109,14 +109,14 @@ return {
         files = {
           cwd_prompt = false,
           actions = {
-            ["ctrl-i"] = { actions.toggle_ignore },
-            ["ctrl-h"] = { actions.toggle_hidden },
+            ["ctrl-alt-i"] = { actions.toggle_ignore },
+            ["ctrl-alt-h"] = { actions.toggle_hidden },
           },
         },
         grep = {
           actions = {
-            ["ctrl-i"] = { actions.toggle_ignore },
-            ["ctrl-h"] = { actions.toggle_hidden },
+            ["ctrl-alt-i"] = { actions.toggle_ignore },
+            ["ctrl-alt-h"] = { actions.toggle_hidden },
           },
         },
         lsp = {
