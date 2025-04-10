@@ -90,6 +90,10 @@ export PATH="/Users/maxime.cappellen.e/.rd/bin:$PATH"
 export VISUAL=nvim
 export EDITOR=nvim
 
+export TERM=xterm-256color
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # alias
 alias k="kubectl"
 alias n="nvim"
