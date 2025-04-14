@@ -1,17 +1,33 @@
 #!/bin/bash
 
+# Parse command-line arguments
+IGNORE_NIX=false
+for arg in "$@"; do
+  case $arg in
+  --nix-ignore)
+    IGNORE_NIX=true
+    shift
+    ;;
+  *)
+    shift
+    ;;
+  esac
+done
+
 ## Useful method
 check_nix_installed() {
   command -v nix >/dev/null 2>&1
 }
 
-if ! check_nix_installed; then
-  echo "Nix is not installed. Installing ..."
-  sh <(curl -L https://nixos.org/nix/install)
+if [ "$IGNORE_NIX" = false ]; then
+  if ! check_nix_installed; then
+    echo "Nix is not installed. Installing ..."
+    sh <(curl -L https://nixos.org/nix/install)
 
-  # Source Nix environment after installation
-  if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
-    . ~/.nix-profile/etc/profile.d/nix.sh
+    # Source Nix environment after installation
+    if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
+      . ~/.nix-profile/etc/profile.d/nix.sh
+    fi
   fi
 fi
 
@@ -45,6 +61,8 @@ mkdir -p "$XDG_CONFIG_HOME"/.zsh/completions
 
 echo "Symlinking the configuration files ..."
 
+# Create the .zshrc-local if not present
+[ -f "$HOME"/.zshrc.local ] || touch $HOME/.zshrc.local
 # Backup the existing zshrc file if it exists
 [ -f "$HOME"/.zshrc ] && mv "$HOME"/.zshrc "$HOME"/.zshrc.bak
 # Symlink the zshrc configuration file and force it if it exists
@@ -61,7 +79,9 @@ ln -sf "$PWD"/max.omp.toml "$XDG_CONFIG_HOME"/ohmyposh/max.omp.toml
 ln -sf "$PWD"/config.kdl "$XDG_CONFIG_HOME"/zellij/config.kdl
 
 # Install Nix packages from config.nix
-echo "Installing Nix packages ..."
-nix-env -iA nixpkgs.myPackages
+if [ "$IGNORE_NIX" = false ]; then
+  echo "Installing Nix packages ..."
+  nix-env -iA nixpkgs.myPackages
+fi
 
 echo "Setup complete"

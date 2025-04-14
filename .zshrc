@@ -23,12 +23,6 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-# Add in snippets
-# zinit snippet OMZP::git
-# zinit snippet OMZP::sudo
-# zinit snippet OMZP::kubectl
-# zinit snippet OMZP::kubectx
-
 # Load completions
 fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit && compinit -C
@@ -70,22 +64,9 @@ eval "$(zoxide init --cmd cd zsh)"
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/max.omp.toml)"
 eval "$(fnm env --use-on-cd --shell zsh)"
 
-[ -s "/Users/maxime.cappellen.e/.jabba/jabba.sh" ] && source "/Users/maxime.cappellen.e/.jabba/jabba.sh"
-
-# bun completions
-[ -s "/Users/maxime.cappellen.e/.bun/_bun" ] && source "/Users/maxime.cappellen.e/.bun/_bun"
-
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/maxime.cappellen.e/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
 export VISUAL=nvim
 export EDITOR=nvim
@@ -106,11 +87,5 @@ source ~/.zshrc.local
 # unsetopt XTRACE
 # exec 2>&3 3>& --async-
 
-# fnm
-FNM_PATH="/Users/maxime.cappellen.e/Library/Application Support/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="/Users/maxime.cappellen.e/Library/Application Support/fnm:$PATH"
-  eval "`fnm env`"
-fi
 
 #zprof
