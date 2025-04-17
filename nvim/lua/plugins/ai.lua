@@ -4,22 +4,27 @@ return {
     event = "VeryLazy",
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
-      vendors = {
-        ["taslgpt"] = {
-          __inherited_from = "openai",
-          endpoint = "http://localhost:11434/v1",
-          model = "llama3.1:8b",
-          api_key_name = "",
-          disable_tools = true,
-        },
+      provider = vim.env.COPILOT,
+      ollama = {
+        endpoint = "http://localhost:11434",
+        model = "llama3.1:8b",
       },
+      behaviour = {
+        enable_cursor_planning_mode = false,
+      },
+      -- rag_service = {
+      --   enabled = true,
+      --   host_mount = os.getenv("HOME"),
+      --   provider = "ollama",
+      --   endpoint = "http://localhost:11434",
+      --   model = "llama3.1:8b",
+      -- },
       mappings = {
         ask = "<leader>ac",
       },
       -- add any opts here
       -- for example
-      provider = vim.env.COPILOT,
-      file_selector = { provider = "snacks" },
+      file_selector = { provider = "fzf" },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = "make",
