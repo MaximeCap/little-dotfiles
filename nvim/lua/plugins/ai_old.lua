@@ -53,14 +53,13 @@ return {
   {
     "milanglacier/minuet-ai.nvim",
     enabled = function()
-      return false
-      -- local isThales = vim.fn.getenv("IS_THALES")
-      --
-      -- if isThales == "true" then
-      --   return true
-      -- else
-      --   return false
-      -- end
+      local isThales = vim.fn.getenv("COPILOT")
+
+      if isThales == "ollama" then
+        return true
+      else
+        return false
+      end
     end,
     config = function()
       require("minuet").setup({
@@ -68,8 +67,8 @@ return {
         virtualtext = {
           auto_trigger_ft = { "*" },
           keymap = {
-            accept = "<C-CR>",
-            accept_line = "<C-TAB>",
+            accept = "<M-C-Y>",
+            accept_line = "<M-C-S-Y>",
             -- Cycle to prev completion item, or manually invoke completion
             prev = "<C-h>",
             -- Cycle to next completion item, or manually invoke completion

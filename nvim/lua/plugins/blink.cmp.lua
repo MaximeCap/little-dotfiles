@@ -42,7 +42,7 @@ return {
       completion = {
         list = {
           selection = {
-            preselect = false,
+            preselect = true,
           },
         },
         accept = {

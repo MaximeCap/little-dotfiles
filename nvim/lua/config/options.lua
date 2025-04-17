@@ -5,3 +5,8 @@ local opt = vim.opt
 
 opt.ignorecase = true
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+
+vim.opt.laststatus = 3
