@@ -22,7 +22,7 @@ check_nix_installed() {
 if [ "$IGNORE_NIX" = false ]; then
   if ! check_nix_installed; then
     echo "Nix is not installed. Installing ..."
-    sh <(curl -L https://nixos.org/nix/install)
+    sh <(curl -L https://nixos.org/nix/install) --daemon
 
   fi
 fi
