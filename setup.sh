@@ -76,7 +76,9 @@ ln -sf "$PWD"/config.kdl "$XDG_CONFIG_HOME"/zellij/config.kdl
 
 # Source Nix environment after installation
 if [ -f "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then
+  echo "Nix profile found ! Sourcing it"
   . "$HOME"/.nix-profile/etc/profile.d/nix.sh
+  echo "Sourced"
 fi
 
 # Install Nix packages from config.nix
