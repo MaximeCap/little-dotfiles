@@ -81,7 +81,6 @@ fi
 if [ -f "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then
   echo "Nix profile found ! Sourcing it"
   source "$HOME"/.nix-profile/etc/profile.d/nix.sh
-  echo "Sourced"
 fi
 
 # Install Nix packages from config.nix
@@ -91,3 +90,5 @@ if [ "$IGNORE_NIX" = false ]; then
 fi
 
 echo "Setup complete"
+
+source ~/.zshrc
