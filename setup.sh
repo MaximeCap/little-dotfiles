@@ -24,10 +24,6 @@ if [ "$IGNORE_NIX" = false ]; then
     echo "Nix is not installed. Installing ..."
     sh <(curl -L https://nixos.org/nix/install)
 
-    # Source Nix environment after installation
-    if [ -f "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then
-      . "$HOME"/.nix-profile/etc/profile.d/nix.sh
-    fi
   fi
 fi
 
@@ -77,6 +73,11 @@ ln -sf "$PWD"/tmux.conf "$HOME"/.tmux.conf
 ln -sf "$PWD"/max.omp.toml "$XDG_CONFIG_HOME"/ohmyposh/max.omp.toml
 # Symlink the zellij configuration file
 ln -sf "$PWD"/config.kdl "$XDG_CONFIG_HOME"/zellij/config.kdl
+
+# Source Nix environment after installation
+if [ -f "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then
+  . "$HOME"/.nix-profile/etc/profile.d/nix.sh
+fi
 
 # Install Nix packages from config.nix
 if [ "$IGNORE_NIX" = false ]; then
