@@ -91,6 +91,4 @@ if [ "$IGNORE_NIX" = false ]; then
   "$HOME"/.nix-profile/bin/nix-env -iA nixpkgs.myPackages
 fi
 
-chsh -s /bin/zsh node
-
 echo "Setup complete"
