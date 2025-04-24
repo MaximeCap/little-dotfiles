@@ -83,7 +83,7 @@ fi
 # Install Nix packages from config.nix
 if [ "$IGNORE_NIX" = false ]; then
   echo "Installing Nix packages ..."
-  "$HOME"/.nix-profile/nix/bin/nix-env -iA nixpkgs.myPackages
+  "$HOME"/.nix-profile/bin/nix-env -iA nixpkgs.myPackages
 fi
 
 echo "Setup complete"
