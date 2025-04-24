@@ -23,6 +23,11 @@ if [ "$IGNORE_NIX" = false ]; then
   if ! check_nix_installed; then
     echo "Nix is not installed. Installing ..."
     sh <(curl -L https://nixos.org/nix/install)
+    #
+    # Source Nix environment after installation
+    if [ -f ~/.nix-profile/etc/profile.d/nix.sh ]; then
+      . ~/.nix-profile/etc/profile.d/nix.sh
+    fi
   fi
 fi
 
@@ -85,5 +90,7 @@ if [ "$IGNORE_NIX" = false ]; then
   echo "Installing Nix packages ..."
   "$HOME"/.nix-profile/bin/nix-env -iA nixpkgs.myPackages
 fi
+
+chsh -s /bin/zsh node
 
 echo "Setup complete"
