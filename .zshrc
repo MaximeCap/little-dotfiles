@@ -3,7 +3,8 @@
 #zmodload zsh/zprof
 
 #eval "$(/opt/homebrew/bin/brew shellenv)"
-# if [ -e /home/max/.nix-profile/etc/profile.d/nix.sh ]; then . /home/max/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+if [ -f "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then . "$HOME"/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
