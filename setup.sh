@@ -19,6 +19,19 @@ check_nix_installed() {
   command -v nix >/dev/null 2>&1
 }
 
+if [ "$IGNORE_NIX" = false ]; then
+  if ! check_nix_installed; then
+    echo "Nix is not installed. Installing ..."
+    sh <(curl -L https://nixos.org/nix/install)
+
+    # Source Nix environment after installation
+    if [ -f "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then
+      echo "Nix profile found ! Sourcing it"
+      source "$HOME"/.nix-profile/etc/profile.d/nix.sh
+    fi
+  fi
+fi
+
 # Configure the home directory
 export XDG_CONFIG_HOME="$HOME"/.config
 
@@ -66,23 +79,6 @@ ln -sf "$PWD"/max.omp.toml "$XDG_CONFIG_HOME"/ohmyposh/max.omp.toml
 # Symlink the zellij configuration file
 ln -sf "$PWD"/config.kdl "$XDG_CONFIG_HOME"/zellij/config.kdl
 
-if [ "$IGNORE_NIX" = false ]; then
-  if ! check_nix_installed; then
-    echo "Nix is not installed. Installing ..."
-    sh <(curl -L https://nixos.org/nix/install)
-    #
-    # Source Nix environment after installation
-    if [ -f ~/.nix-profile/etc/profile.d/nix.sh ]; then
-      . ~/.nix-profile/etc/profile.d/nix.sh
-    fi
-  fi
-fi
-# Source Nix environment after installation
-if [ -f "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then
-  echo "Nix profile found ! Sourcing it"
-  source "$HOME"/.nix-profile/etc/profile.d/nix.sh
-fi
-
 # Install Nix packages from config.nix
 if [ "$IGNORE_NIX" = false ]; then
   echo "Installing Nix packages ..."
@@ -90,5 +86,3 @@ if [ "$IGNORE_NIX" = false ]; then
 fi
 
 echo "Setup complete"
-
-source ~/.zshrc
