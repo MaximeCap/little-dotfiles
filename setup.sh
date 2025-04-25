@@ -22,17 +22,79 @@ check_nix_installed() {
 if [ "$IGNORE_NIX" = false ]; then
   if ! check_nix_installed; then
     echo "Nix is not installed. Installing ..."
-    sh <(curl -L https://nixos.org/nix/install)
+
+    # Detect operating system
+    OS=$(uname -s)
+
+    # Check if we're in a container
+    IN_CONTAINER=false
+    if [ -f "/.dockerenv" ] || [ -f "/run/.containerenv" ] || grep -q docker /proc/1/cgroup 2>/dev/null; then
+      IN_CONTAINER=true
+    fi
+
+    if [ "$OS" = "Darwin" ]; then
+      # macOS installation - always use multi-user install
+      echo "Detected macOS - using multi-user installation"
+      sh <(curl -L https://nixos.org/nix/install)
+    elif [ "$IN_CONTAINER" = true ]; then
+      # Container installation - always use single-user install
+      echo "Detected container environment - using single-user installation"
+      sh <(curl -L https://nixos.org/nix/install) --no-daemon
+    else
+      # Linux non-container - prefer multi-user but fallback to single-user
+      echo "Detected Linux - attempting multi-user installation"
+      if command -v systemctl >/dev/null 2>&1; then
+        sh <(curl -L https://nixos.org/nix/install)
+      else
+        echo "systemd not detected - falling back to single-user installation"
+        sh <(curl -L https://nixos.org/nix/install) --no-daemon
+      fi
+    fi
 
     # Source Nix environment after installation
-    if [ -f "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then
-      echo "Nix profile found ! Sourcing it"
-      source "$HOME"/.nix-profile/etc/profile.d/nix.sh
+    if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    elif [ -f ~/.nix-profile/etc/profile.d/nix.sh ]; then
+      . ~/.nix-profile/etc/profile.d/nix.sh
     fi
   fi
 fi
 
-# Configure the home directory
+# Function to source Nix and verify installation
+source_nix_and_verify() {
+  # Source Nix environment for this session
+  if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+    echo "Nix daemon profile found! Sourcing it"
+    source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    echo "Sourced nix-daemon.sh"
+  elif [ -f "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then
+    echo "Nix single-user profile found! Sourcing it"
+    source "$HOME"/.nix-profile/etc/profile.d/nix.sh
+    echo "Sourced nix.sh"
+  else
+    echo "Warning: Neither Nix daemon nor single-user profile found."
+    return 1
+  fi
+
+  # Add Nix to PATH explicitly as a fallback
+  if [ -d "$HOME/.nix-profile/bin" ]; then
+    export PATH="$HOME/.nix-profile/bin:$PATH"
+    echo "Added $HOME/.nix-profile/bin to PATH"
+  fi
+
+  # Verify nix is in path
+  if command -v nix >/dev/null 2>&1; then
+    echo "Success: nix is now in PATH: $(which nix)"
+    return 0
+  else
+    echo "Error: nix command still not found in PATH even after sourcing"
+    return 1
+  fi
+}
+
+# Source Nix and verify it works
+source_nix_and_verify# Configure the home directory
+
 export XDG_CONFIG_HOME="$HOME"/.config
 
 #############################################
