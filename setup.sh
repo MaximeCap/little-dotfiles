@@ -131,7 +131,7 @@ echo "Symlinking the configuration files ..."
 # Symlink the zshrc configuration file and force it if it exists
 ln -sf "$PWD"/.zshrc "$HOME"/.zshrc
 # Symlink the nvim configuration file
-ln -sf "$PWD"/nvim "$XDG_CONFIG_HOME"/nvim
+ln -sf "$PWD"/nvim/ "$XDG_CONFIG_HOME"/nvim/
 # Symlink the nix configuration file
 ln -sf "$PWD"/config.nix "$XDG_CONFIG_HOME"/nixpkgs/config.nix
 # Symlink the tmux configuration file

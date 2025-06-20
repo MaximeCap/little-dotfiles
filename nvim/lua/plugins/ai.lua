@@ -5,9 +5,11 @@ return {
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
       provider = vim.env.COPILOT,
-      ollama = {
-        endpoint = "http://localhost:11434",
-        model = "llama3.1:8b",
+      providers = {
+        ollama = {
+          endpoint = "http://localhost:11434",
+          model = "llama3.1:8b",
+        },
       },
       behaviour = {
         enable_cursor_planning_mode = false,
