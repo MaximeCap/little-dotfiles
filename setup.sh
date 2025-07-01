@@ -135,7 +135,7 @@ ln -sf "$PWD"/nvim/ "$XDG_CONFIG_HOME"/nvim/
 # Symlink the nix configuration file
 ln -sf "$PWD"/config.nix "$XDG_CONFIG_HOME"/nixpkgs/config.nix
 # Symlink the tmux configuration file
-ln -sf "$PWD"/tmux.conf "$HOME"/.tmux.conf
+ln -sf "$PWD"/tmux.conf "$XDG_CONFIG_HOME"/tmux/tmux.conf
 # Symlink the oh-my-posh configuration file
 ln -sf "$PWD"/max.omp.toml "$XDG_CONFIG_HOME"/ohmyposh/max.omp.toml
 # Symlink the zellij configuration file

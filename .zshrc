@@ -73,7 +73,7 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
 export VISUAL=nvim
 export EDITOR=nvim
 
-export TERM=xterm-256color
+export TERM=xterm-ghostty
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -91,3 +91,4 @@ source ~/.zshrc.local
 
 
 #zprof
+
