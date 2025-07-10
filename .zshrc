@@ -2,7 +2,7 @@
 
 #zmodload zsh/zprof
 
-#eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 if [ -f "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then . "$HOME"/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
