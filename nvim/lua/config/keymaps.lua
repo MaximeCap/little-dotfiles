@@ -12,3 +12,5 @@ vim.keymap.set("i", "<A-C-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" }
 vim.keymap.set("i", "<A-C-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 vim.keymap.set("v", "<A-C-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
 vim.keymap.set("v", "<A-C-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
+
+vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true, silent = true })

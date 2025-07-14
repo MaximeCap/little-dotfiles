@@ -8,7 +8,7 @@ return {
       providers = {
         ollama = {
           endpoint = "http://localhost:11434",
-          model = "llama3.1:8b",
+          model = "devstral:latest",
         },
       },
       behaviour = {

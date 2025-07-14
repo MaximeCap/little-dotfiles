@@ -93,7 +93,8 @@ source_nix_and_verify() {
 }
 
 # Source Nix and verify it works
-source_nix_and_verify# Configure the home directory
+#source_nix_and_verify
+# Configure the home directory
 
 export XDG_CONFIG_HOME="$HOME"/.config
 
@@ -111,7 +112,8 @@ mkdir -p "$XDG_CONFIG_HOME"/nixpkgs
 mkdir -p "$XDG_CONFIG_HOME"/ohmyposh
 # Create the zellij folder
 mkdir -p "$XDG_CONFIG_HOME"/zellij
-
+# Create the nvim folder
+mkdir -p "$XDG_CONFIG_HOME/nvim"
 # Create the folder for zsh completion
 mkdir -p "$XDG_CONFIG_HOME"/.zsh/completions
 
@@ -131,11 +133,11 @@ echo "Symlinking the configuration files ..."
 # Symlink the zshrc configuration file and force it if it exists
 ln -sf "$PWD"/.zshrc "$HOME"/.zshrc
 # Symlink the nvim configuration file
-ln -sf "$PWD"/nvim/ "$XDG_CONFIG_HOME"/nvim/
+ln -sf "$PWD/nvim/"* "$XDG_CONFIG_HOME/nvim"
 # Symlink the nix configuration file
 ln -sf "$PWD"/config.nix "$XDG_CONFIG_HOME"/nixpkgs/config.nix
 # Symlink the tmux configuration file
-ln -sf "$PWD"/tmux.conf "$HOME"/.tmux.conf
+ln -sf "$PWD"/tmux.conf "$XDG_CONFIG_HOME"/tmux/tmux.conf
 # Symlink the oh-my-posh configuration file
 ln -sf "$PWD"/max.omp.toml "$XDG_CONFIG_HOME"/ohmyposh/max.omp.toml
 # Symlink the zellij configuration file

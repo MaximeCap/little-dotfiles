@@ -1,5 +1,14 @@
 return {
   {
+    "folke/snacks.nvim",
+    ---@type snacks.Config
+    opts = {
+      image = {
+        force = true,
+      },
+    },
+  },
+  {
     "ibhagwan/fzf-lua",
     opts = function(_, opts)
       local fzf = require("fzf-lua")

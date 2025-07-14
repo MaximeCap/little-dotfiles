@@ -2,7 +2,7 @@
 
 #zmodload zsh/zprof
 
-#eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 if [ -f "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then . "$HOME"/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
@@ -73,7 +73,7 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
 export VISUAL=nvim
 export EDITOR=nvim
 
-export TERM=xterm-256color
+export TERM=xterm-ghostty
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -91,3 +91,4 @@ source ~/.zshrc.local
 
 
 #zprof
+
