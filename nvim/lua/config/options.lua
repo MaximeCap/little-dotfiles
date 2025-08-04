@@ -2,6 +2,7 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 local opt = vim.opt
+opt.winborder = "rounded"
 
 opt.ignorecase = true
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
