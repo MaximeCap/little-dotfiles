@@ -26,7 +26,7 @@ zinit light Aloxaf/fzf-tab
 
 # Load completions
 fpath=(~/.zsh/completions $fpath)
-autoload -Uz compinit && compinit -C
+autoload -Uz compinit; compinit -C
 
 zinit cdreplay -q
 
@@ -57,7 +57,6 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias ls='ls --color'
-#alias air=$(go env GOPATH)/bin/air
 
 # Shell integrations
 eval "$(fzf --zsh)"
@@ -73,7 +72,12 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
 export VISUAL=nvim
 export EDITOR=nvim
 
-export TERM=xterm-ghostty
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export TERM=xterm-ghostty
+else
+    export TERM=screen
+fi
+
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -83,7 +87,7 @@ alias n="nvim"
 alias ll="ls -la"
 alias lg="lazygit"
 
-source ~/.zshrc.local
+source ~/.zshrc-local
 
 # End timing
 # unsetopt XTRACE

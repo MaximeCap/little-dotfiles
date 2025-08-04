@@ -4,7 +4,7 @@ return {
     ---@type snacks.Config
     opts = {
       image = {
-        force = true,
+        force = false,
       },
     },
   },

@@ -7,5 +7,4 @@ return {
     "blink-cmp-copilot",
     enabled = vim.env.COPILOT == "copilot",
   },
-  {},
 }
