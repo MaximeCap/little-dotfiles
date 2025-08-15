@@ -8,11 +8,13 @@ function M.setup()
 		{ src = 'https://github.com/stevearc/conform.nvim' }
 	})
 
+	-- Install LSP
 	require "mason".setup()
 	require "mason-lspconfig".setup {
 		ensure_installed = { "lua_ls", "gopls" }
 	}
 
+	-- Remove warning with global variable vim
 	vim.lsp.config("lua_ls", {
 		on_init = function(client)
 			local path = client.workspace_folders[1].name
@@ -56,6 +58,7 @@ function M.setup()
 
 	vim.cmd("set completeopt+=noselect")
 
+	--  Autoformat
 	require "conform".setup({
 		format_on_save = {
 			timeout_ms = 500,
