@@ -19,10 +19,12 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "master" },
 	{ src = "https://github.com/folke/snacks.nvim" },
-	{ src = "https://github.com/windwp/nvim-autopairs" }
+	{ src = "https://github.com/windwp/nvim-autopairs" },
+	{ src = "https://github.com/echasnovski/mini.surround" }
 })
 
 require "nvim-autopairs".setup()
+require "mini.surround".setup()
 
 local snacks = require "snacks"
 
@@ -49,6 +51,7 @@ require "after"
 require "oil".setup()
 
 map("n", "<leader>f", function() snacks.picker.smart() end)
+map("n", "<leader>/", function() snacks.picker.grep() end)
 map("n", "<leader><leader>", function() snacks.picker.smart() end)
 map("n", "<leader>e", ":Oil<CR>")
 map("n", "<leader>gg", function() snacks.lazygit() end)

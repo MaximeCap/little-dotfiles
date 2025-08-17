@@ -106,6 +106,17 @@ function M.setup()
 
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(ev)
+			local Snacks = require "snacks"
+			vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" })
+			vim.keymap.set("n", "gD", function() Snacks.picker.lsp_declarations() end, { desc = "Goto Declaration" })
+			vim.keymap.set("n", "gr", function() Snacks.picker.lsp_references() end,
+				{ nowait = true, desc = "References" })
+			vim.keymap.set("n", "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" })
+			vim.keymap.set("n", "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" })
+			vim.keymap.set("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" })
+			vim.keymap.set("n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end,
+				{ desc = "LSP Workspace Symbols" })
+
 			local client = vim.lsp.get_client_by_id(ev.data.client_id)
 			if client ~= nil and client:supports_method('textDocument/completion') then
 				vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
