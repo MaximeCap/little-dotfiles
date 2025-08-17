@@ -7,15 +7,25 @@ function M.setup()
 		{ src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
 		{ src = 'https://github.com/stevearc/conform.nvim' },
 		{ src = 'https://github.com/j-hui/fidget.nvim' },
-		{ src = 'https://github.com/ray-x/lsp_signature.nvim' }
+		{ src = 'https://github.com/ray-x/lsp_signature.nvim' },
+		{ src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' }
 	})
 
 	require "fidget".setup()
 
 	-- Install LSP
 	require "mason".setup()
-	require "mason-lspconfig".setup {
-		ensure_installed = { "lua_ls", "gopls", "vtsls" }
+	require "mason-lspconfig".setup {}
+
+	require('mason-tool-installer').setup {
+		ensure_installed = {
+			"docker-language-server",
+			"lua_ls",
+			"gopls",
+			"vtsls",
+			"eslint",
+			"prettier"
+		}
 	}
 
 	-- Remove warning with global variable vim
