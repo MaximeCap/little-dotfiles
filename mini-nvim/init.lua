@@ -20,7 +20,6 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "master" },
 	{ src = "https://github.com/folke/snacks.nvim" },
 	{ src = "https://github.com/windwp/nvim-autopairs" }
-
 })
 
 require "nvim-autopairs".setup()
@@ -41,12 +40,13 @@ require "nvim-treesitter.configs".setup {
 	}
 }
 
+
 require "plugins.ui".setup()
 require "plugins.lsp".setup()
 require "plugins.debug".setup()
+require "after"
 
 require "oil".setup()
-require "after.files".setup()
 
 map("n", "<leader>f", function() snacks.picker.smart() end)
 map("n", "<leader><leader>", function() snacks.picker.smart() end)

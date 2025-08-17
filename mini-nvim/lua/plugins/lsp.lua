@@ -6,7 +6,8 @@ function M.setup()
 		{ src = "https://github.com/mason-org/mason.nvim" },
 		{ src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
 		{ src = 'https://github.com/stevearc/conform.nvim' },
-		{ src = 'https://github.com/j-hui/fidget.nvim' }
+		{ src = 'https://github.com/j-hui/fidget.nvim' },
+		{ src = 'https://github.com/ray-x/lsp_signature.nvim' }
 	})
 
 	require "fidget".setup()
@@ -14,7 +15,7 @@ function M.setup()
 	-- Install LSP
 	require "mason".setup()
 	require "mason-lspconfig".setup {
-		ensure_installed = { "lua_ls", "gopls", "ts_ls" }
+		ensure_installed = { "lua_ls", "gopls", "vtsls" }
 	}
 
 	-- Remove warning with global variable vim
@@ -65,13 +66,33 @@ function M.setup()
 
 	})
 
-	-- vim.lsp.config("*", {
-	-- 	capabilities = {
-	-- 		textDocument = {
-	-- 			inlayHint = true
-	-- 		}
-	-- 	}
-	-- })
+	vim.lsp.config("vtsls", {
+		filetypes = {
+			"javascript",
+			"javascriptreact",
+			"javascript.jsx",
+			"typescript",
+			"typescriptreact",
+			"typescript.tsx",
+		},
+		settings = {
+			typescript = {
+				updateImportsOnFileMove = { enabled = "always" },
+				suggest = {
+					completeFunctionCalls = true,
+				},
+				inlayHints = {
+					enumMemberValues = { enabled = true },
+					functionLikeReturnTypes = { enabled = true },
+					parameterNames = { enabled = "literals" },
+					parameterTypes = { enabled = true },
+					propertyDeclarationTypes = { enabled = true },
+					variableTypes = { enabled = false },
+				},
+			},
+		}
+	})
+
 
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(ev)
@@ -83,6 +104,8 @@ function M.setup()
 			if client ~= nil and client:supports_method('textDocument/inlayHint') then
 				vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
 			end
+
+			require "lsp_signature".setup({}, ev.buf)
 		end
 	})
 
@@ -90,11 +113,19 @@ function M.setup()
 
 	--  Autoformat
 	require "conform".setup({
+		formatters_by_ft = {
+			typescript = { "prettier" }
+		},
 		format_on_save = {
 			timeout_ms = 500,
 			lsp_format = "fallback"
 		}
 	})
+
+	vim.keymap.set("n", "<leader>ch", function()
+		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+		print("Inlay hints : " .. tostring(vim.lsp.inlay_hint.is_enabled()))
+	end)
 end
 
 return M
