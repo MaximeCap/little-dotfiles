@@ -88,7 +88,7 @@ alias ll="ls -la"
 alias lg="lazygit"
 alias bvim="NVIM_APPNAME=mini-nvim nvim"
 
-source ~/.zshrc-local
+source ~/.zshrc.local
 
 # End timing
 # unsetopt XTRACE
