@@ -107,6 +107,7 @@ function M.setup()
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(ev)
 			local Snacks = require "snacks"
+			vim.keymap.set("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>", { desc = "Code actions" })
 			vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" })
 			vim.keymap.set("n", "gD", function() Snacks.picker.lsp_declarations() end, { desc = "Goto Declaration" })
 			vim.keymap.set("n", "gr", function() Snacks.picker.lsp_references() end,
@@ -135,7 +136,8 @@ function M.setup()
 	--  Autoformat
 	require "conform".setup({
 		formatters_by_ft = {
-			typescript = { "prettier" }
+			typescript = { "prettier" },
+			typescriptreact = { "prettier" }
 		},
 		format_on_save = {
 			timeout_ms = 500,

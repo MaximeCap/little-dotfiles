@@ -48,7 +48,11 @@ require "plugins.lsp".setup()
 require "plugins.debug".setup()
 require "after"
 
-require "oil".setup()
+require "oil".setup {
+	view_options = {
+		show_hidden = true
+	}
+}
 
 map("n", "<leader>f", function() snacks.picker.smart() end)
 map("n", "<leader>/", function() snacks.picker.grep() end)
