@@ -86,6 +86,7 @@ alias k="kubectl"
 alias n="nvim"
 alias ll="ls -la"
 alias lg="lazygit"
+alias bvim="NVIM_APPNAME=mini-nvim nvim"
 
 source ~/.zshrc-local
 
