@@ -114,6 +114,8 @@ mkdir -p "$XDG_CONFIG_HOME"/ohmyposh
 mkdir -p "$XDG_CONFIG_HOME"/zellij
 # Create the nvim folder
 mkdir -p "$XDG_CONFIG_HOME/nvim"
+# Create the mini-nvim folder
+mkdir -p "$XDG_CONFIG_HOME/mini-nvim"
 # Create the folder for zsh completion
 mkdir -p "$XDG_CONFIG_HOME"/.zsh/completions
 
@@ -134,6 +136,8 @@ echo "Symlinking the configuration files ..."
 ln -sf "$PWD"/.zshrc "$HOME"/.zshrc
 # Symlink the nvim configuration file
 ln -sf "$PWD/nvim/"* "$XDG_CONFIG_HOME/nvim"
+# Symlink the nvim configuration file
+ln -sf "$PWD/mini-nvim/"* "$XDG_CONFIG_HOME/mini-nvim"
 # Symlink the nix configuration file
 ln -sf "$PWD"/config.nix "$XDG_CONFIG_HOME"/nixpkgs/config.nix
 # Symlink the tmux configuration file
