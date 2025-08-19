@@ -10,6 +10,8 @@ vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 vim.opt.tabstop = 2
 vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 local map = vim.keymap.set
 

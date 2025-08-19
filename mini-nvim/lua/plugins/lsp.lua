@@ -8,7 +8,8 @@ function M.setup()
 		{ src = 'https://github.com/stevearc/conform.nvim' },
 		{ src = 'https://github.com/j-hui/fidget.nvim' },
 		{ src = 'https://github.com/ray-x/lsp_signature.nvim' },
-		{ src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' }
+		{ src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' },
+		{ src = 'https://github.com/qvalentin/helm-ls.nvim' }
 	})
 
 	require "fidget".setup()
@@ -19,7 +20,10 @@ function M.setup()
 
 	require('mason-tool-installer').setup {
 		ensure_installed = {
+			"kube-linter",
 			"docker-language-server",
+			"yamlls",
+			"helm_ls",
 			"lua_ls",
 			"gopls",
 			"vtsls",
@@ -127,17 +131,22 @@ function M.setup()
 				vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
 			end
 
+			if client ~= nil and client.id == "helm_ls" then
+				require "helm-ls".setup()
+			end
+
 			require "lsp_signature".setup({}, ev.buf)
 		end
 	})
 
-	vim.cmd("set completeopt+=noselect")
+	vim.cmd("set completeopt+=menuone,noselect,popup")
 
 	--  Autoformat
 	require "conform".setup({
 		formatters_by_ft = {
 			typescript = { "prettier" },
-			typescriptreact = { "prettier" }
+			typescriptreact = { "prettier" },
+			yaml = { "prettier" }
 		},
 		format_on_save = {
 			timeout_ms = 500,
