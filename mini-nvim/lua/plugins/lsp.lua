@@ -7,7 +7,6 @@ function M.setup()
 		{ src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
 		{ src = 'https://github.com/stevearc/conform.nvim' },
 		{ src = 'https://github.com/j-hui/fidget.nvim' },
-		{ src = 'https://github.com/ray-x/lsp_signature.nvim' },
 		{ src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' },
 		{ src = 'https://github.com/qvalentin/helm-ls.nvim' }
 	})
@@ -123,9 +122,11 @@ function M.setup()
 				{ desc = "LSP Workspace Symbols" })
 
 			local client = vim.lsp.get_client_by_id(ev.data.client_id)
-			if client ~= nil and client:supports_method('textDocument/completion') then
-				vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-			end
+
+			-- No need if we use Blink.cmp
+			-- if client ~= nil and client:supports_method('textDocument/completion') then
+			-- 	vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+			-- end
 
 			if client ~= nil and client:supports_method('textDocument/inlayHint') then
 				vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
@@ -135,11 +136,23 @@ function M.setup()
 				require "helm-ls".setup()
 			end
 
-			require "lsp_signature".setup({}, ev.buf)
+			--require "lsp_signature".setup({}, ev.buf)
 		end
 	})
 
-	vim.cmd("set completeopt+=menuone,noselect,popup")
+	require 'blink.cmp'.setup({
+		fuzzy =  { implementation = "prefer_rust_with_warning" } ,
+		signature = { enabled = true },
+		completion = {
+			menu = {
+				auto_show = true,
+				draw = {
+					treesitter = { "lsp" },
+					columns = { { "kind_icon", "label", "label_description", gap = 1 }, { "kind" } }
+				}
+			}
+		}
+	})
 
 	--  Autoformat
 	require "conform".setup({

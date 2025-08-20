@@ -22,7 +22,8 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "master" },
 	{ src = "https://github.com/folke/snacks.nvim" },
 	{ src = "https://github.com/windwp/nvim-autopairs" },
-	{ src = "https://github.com/echasnovski/mini.surround" }
+	{ src = "https://github.com/echasnovski/mini.surround" },
+	{ src = "https://github.com/saghen/blink.cmp", version = "v1.6.0"}
 })
 
 require "nvim-autopairs".setup()
