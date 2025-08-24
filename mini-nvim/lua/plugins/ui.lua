@@ -7,7 +7,11 @@ function M.setup()
 		{ src = "https://github.com/nvim-lualine/lualine.nvim" }
 	})
 
-	require "onedarkpro".setup()
+	require "onedarkpro".setup {
+		options = {
+			transparency = true
+		}
+	}
 	require "lualine".setup()
 
 	vim.cmd("colorscheme onedark")
