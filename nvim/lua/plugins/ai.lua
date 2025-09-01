@@ -1,73 +1,38 @@
-return {
-  {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    version = "*", -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-    opts = {
-      provider = vim.env.COPILOT,
-      providers = {
-        ollama = {
-          endpoint = "http://localhost:11434",
-          model = "devstral:latest",
-        },
-      },
-      behaviour = {
-        enable_cursor_planning_mode = false,
-      },
-      -- rag_service = {
-      --   enabled = true,
-      --   host_mount = os.getenv("HOME"),
-      --   provider = "ollama",
-      --   endpoint = "http://localhost:11434",
-      --   model = "llama3.1:8b",
-      -- },
-      mappings = {
-        ask = "<leader>ac",
-      },
-      -- add any opts here
-      -- for example
-      file_selector = { provider = "fzf" },
-    },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      --- The below dependencies are optional,
-      "echasnovski/mini.pick", -- for file_selector provider mini.pick
-      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-      "ibhagwan/fzf-lua", -- for file_selector provider fzf
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      { "zbirenbaum/copilot.lua", enabled = vim.env.COPILOT == "copilot" }, -- for providers='copilot'
-      {
-        -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
-        event = "VeryLazy",
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            -- required for Windows users
-            use_absolute_path = true,
-          },
-        },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        "MeanderingProgrammer/render-markdown.nvim",
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
-    },
-  },
-}
+local M = {}
+
+function M.setup()
+	vim.pack.add({
+		{ src = "https://github.com/nvim-lua/plenary.nvim" },
+		{ src = "https://github.com/milanglacier/minuet-ai.nvim" }
+	})
+
+	require "minuet".setup {
+		virtualtext = {
+			auto_trigger_ft = { '*' },
+			keymap = {
+				accept = "<A-A>",
+				accept_line = "<A-a>",
+				prev = "<A-[>",
+				next = "<A-]>",
+				dismiss = "<A-e>"
+			}
+		},
+		provider = "openai_fim_compatible",
+		notify = "debug",
+		provider_options = {
+			openai_fim_compatible = {
+				model = 'qwen2.5-coder:1.5b-base',
+				stream = false,
+				end_point = 'http://localhost:11434/v1/completions',
+				api_key = 'TERM',
+				name = 'qwen2.5-coder:1.5b-base',
+				optional = {
+					stop = nil,
+					max_tokens = nil,
+				},
+			}
+		}
+	}
+end
+
+return M
