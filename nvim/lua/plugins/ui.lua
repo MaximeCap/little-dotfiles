@@ -12,7 +12,20 @@ function M.setup()
 			transparency = true
 		}
 	}
-	require "lualine".setup()
+	require "lualine".setup({
+		sections = {
+			lualine_x = {
+				{
+					require "minuet.lualine",
+					display_name = 'provider',
+					display_on_idle = true
+				},
+				'encoding',
+				'fileformat',
+				'filetype'
+			}
+		}
+	})
 
 	vim.cmd("colorscheme onedark")
 end

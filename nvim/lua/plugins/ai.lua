@@ -6,7 +6,8 @@ function M.setup()
 		{ src = "https://github.com/milanglacier/minuet-ai.nvim" }
 	})
 
-	require "minuet".setup {
+	local minuet = require "minuet"
+	minuet.setup {
 		virtualtext = {
 			auto_trigger_ft = { '*' },
 			keymap = {
@@ -25,7 +26,7 @@ function M.setup()
 				stream = false,
 				end_point = 'http://localhost:11434/v1/completions',
 				api_key = 'TERM',
-				name = 'qwen2.5-coder:1.5b-base',
+				name = 'Qwen ✨',
 				optional = {
 					stop = nil,
 					max_tokens = nil,

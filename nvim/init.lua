@@ -46,9 +46,9 @@ require "nvim-treesitter.configs".setup {
 }
 
 
-require "plugins.ui".setup()
 require "plugins.ai".setup()
 require "plugins.lsp".setup()
+require "plugins.ui".setup()
 require "plugins.debug".setup()
 require "after"
 
