@@ -145,16 +145,7 @@ function M.setup()
 			['<A-y>'] = require "minuet".make_blink_map()
 		},
 		sources = {
-			default = { 'lsp', 'path', 'buffer', 'snippets', 'minuet' },
-			providers = {
-				minuet = {
-					name = "minuet",
-					module = "minuet.blink",
-					async = true,
-					timeout_ms = 3000,
-					score_offset = 50
-				}
-			}
+			default = { 'lsp', 'path', 'buffer', 'snippets' },
 		},
 		fuzzy = { implementation = "prefer_rust_with_warning" },
 		signature = { enabled = true },
