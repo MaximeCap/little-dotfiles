@@ -74,7 +74,11 @@ function M.setup()
 		{ src = "https://github.com/nvim-lualine/lualine.nvim" }
 	})
 
-	require "gruvbox".setup {}
+	require "gruvbox".setup {
+		terminal_colors = true,
+		transparent_mode = true,
+		dim_active = true
+	}
 
 	require "lualine".setup({
 		sections = {
