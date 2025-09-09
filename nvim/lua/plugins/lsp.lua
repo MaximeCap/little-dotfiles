@@ -121,6 +121,11 @@ function M.setup()
 			vim.keymap.set("n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end,
 				{ desc = "LSP Workspace Symbols" })
 
+			vim.keymap.set('n', 'gK', function()
+				local new_config = not vim.diagnostic.config().virtual_lines
+				vim.diagnostic.config({ virtual_lines = new_config })
+			end, { desc = 'Toggle diagnostic virtual_lines' })
+
 			local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
 			-- No need if we use Blink.cmp
