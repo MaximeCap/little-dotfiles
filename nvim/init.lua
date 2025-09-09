@@ -63,5 +63,6 @@ map("n", "<leader>/", function() snacks.picker.grep() end)
 map("n", "<leader><leader>", function() snacks.picker.smart() end)
 map("n", "<leader>e", ":Oil<CR>")
 map("n", "<leader>gg", function() snacks.lazygit() end)
+map("n", "<Esc><Esc>", ":noh<CR>")
 
 vim.cmd(":hi statusline guibg=NONE")

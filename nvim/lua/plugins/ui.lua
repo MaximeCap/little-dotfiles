@@ -71,7 +71,8 @@ function M.setup()
 		--{ src = "https://github.com/rktjmp/fwatch.nvim" },
 		{ src = "https://github.com/ellisonleao/gruvbox.nvim" },
 		{ src = "https://github.com/lewis6991/gitsigns.nvim" },
-		{ src = "https://github.com/nvim-lualine/lualine.nvim" }
+		{ src = "https://github.com/nvim-lualine/lualine.nvim" },
+		{ src = "https://github.com/akinsho/toggleterm.nvim" }
 	})
 
 	require "gruvbox".setup {
@@ -94,6 +95,8 @@ function M.setup()
 			}
 		}
 	})
+
+	require("toggleterm").setup {}
 
 	--vim.o.background = theme
 
