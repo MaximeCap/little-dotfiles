@@ -26,6 +26,7 @@ function M.setup()
 			"lua_ls",
 			"gopls",
 			"vtsls",
+			"tailwindcss",
 			"eslint",
 			"prettier"
 		}
