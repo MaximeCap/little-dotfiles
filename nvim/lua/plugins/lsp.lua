@@ -112,6 +112,7 @@ function M.setup()
 		callback = function(ev)
 			local Snacks = require "snacks"
 			vim.keymap.set("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>", { desc = "Code actions" })
+			vim.keymap.set("n", "<leader>cr", ":lua vim.lsp.buf.rename()<CR>", { desc = "Rename" })
 			vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" })
 			vim.keymap.set("n", "gD", function() Snacks.picker.lsp_declarations() end, { desc = "Goto Declaration" })
 			vim.keymap.set("n", "gr", function() Snacks.picker.lsp_references() end,

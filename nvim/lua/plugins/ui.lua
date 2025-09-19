@@ -72,12 +72,14 @@ function M.setup()
 		{ src = "https://github.com/ellisonleao/gruvbox.nvim" },
 		{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 		{ src = "https://github.com/nvim-lualine/lualine.nvim" },
-		{ src = "https://github.com/akinsho/toggleterm.nvim" }
+		{ src = "https://github.com/akinsho/toggleterm.nvim" },
+		{ src = "https://github.com/folke/todo-comments.nvim" },
+		{ src = "https://github.com/folke/which-key.nvim" },
+		{ src = "https://github.com/folke/flash.nvim" }
 	})
 
 	require "gruvbox".setup {
 		terminal_colors = true,
-		transparent_mode = true,
 		dim_active = true
 	}
 
@@ -97,6 +99,13 @@ function M.setup()
 	})
 
 	require("toggleterm").setup {}
+	require("flash").setup {}
+	require("todo-comments").setup {}
+	local whichKey = require("which-key")
+	whichKey.setup()
+
+	-- vim.keymap.set("n", "<leader>?", whichKey.show({ global = false }))
+
 
 	--vim.o.background = theme
 
