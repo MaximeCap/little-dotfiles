@@ -1,4 +1,6 @@
 brew "eza"
+brew "bat"
+brew "lazygit"
 brew "fzf"
 brew "zoxide"
 brew "tmux"
