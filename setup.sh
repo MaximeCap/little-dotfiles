@@ -43,5 +43,5 @@ ln -sf "$PWD/starship.toml" "$XDG_CONFIG_HOME/starship.toml"
 
 echo "Setup complete"
 
-echo "source ~/.local/share/omarchy/rc" >> "$HOME/.bashrc"
+echo "source ~/.local/share/omarchy/rc.sh" >> "$HOME/.bashrc"
 
