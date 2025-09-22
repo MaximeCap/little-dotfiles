@@ -67,17 +67,6 @@ local M = {}
 -- watch_theme_change()
 
 function M.setup()
-	vim.pack.add({
-		--{ src = "https://github.com/rktjmp/fwatch.nvim" },
-		{ src = "https://github.com/ellisonleao/gruvbox.nvim" },
-		{ src = "https://github.com/lewis6991/gitsigns.nvim" },
-		{ src = "https://github.com/nvim-lualine/lualine.nvim" },
-		{ src = "https://github.com/akinsho/toggleterm.nvim" },
-		{ src = "https://github.com/folke/todo-comments.nvim" },
-		{ src = "https://github.com/folke/which-key.nvim" },
-		{ src = "https://github.com/folke/flash.nvim" }
-	})
-
 	require "gruvbox".setup {
 		terminal_colors = true,
 		dim_active = true

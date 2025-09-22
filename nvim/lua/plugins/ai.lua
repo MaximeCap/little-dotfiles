@@ -1,11 +1,6 @@
 local M = {}
 
 function M.setup()
-	vim.pack.add({
-		{ src = "https://github.com/nvim-lua/plenary.nvim" },
-		{ src = "https://github.com/milanglacier/minuet-ai.nvim" }
-	})
-
 	local minuet = require "minuet"
 	-- minuet.setup {
 	-- 	virtualtext = {
