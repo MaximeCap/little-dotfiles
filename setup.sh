@@ -5,6 +5,17 @@ export XDG_CONFIG_HOME="$HOME"/.config
 # Installing
 echo "Installing..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+OS=$(uname -s)
+BREW_SHELL_ENV=""
+if [ "$OS" = "Darwin" ]; then
+	BREW_SHELL_ENV="/opt/homebrew/bin/brew"
+else
+	BREW_SHELL_ENV="/home/linuxbrew/.linuxbrew/bin/brew"
+fi
+echo 'eval "$(BREW_SHELL_ENV shellenv)"' >> "$HOME/.bashrc"
+eval "$(BREW_SHELL_ENV shellenv)"
+
 brew bundle check || brew bundle install
 
 # Create folder if not exist
