@@ -13,7 +13,7 @@ if [ "$OS" = "Darwin" ]; then
 else
 	BREW_SHELL_ENV="/home/linuxbrew/.linuxbrew/bin/brew"
 fi
-echo 'eval "$($BREW_SHELL_ENV shellenv)"' >> "$HOME/.bashrc"
+echo "eval \"\$($BREW_SHELL_ENV shellenv)\"" >> "$HOME/.bashrc"
 eval "$($BREW_SHELL_ENV shellenv)"
 
 brew bundle check || brew bundle install
