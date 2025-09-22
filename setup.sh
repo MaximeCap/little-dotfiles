@@ -22,6 +22,7 @@ brew bundle check || brew bundle install
 echo "Creating necessary folders"
 mkdir -p "$XDG_CONFIG_HOME"
 mkdir -p "$XDG_CONFIG_HOME/nvim"
+mkdir -p "$HOME/.local/share/omarchy"
 
 # Create local .zshrc.local for fine tunning
 [ -f "$HOME"/.zshrc.local ] || touch $HOME/.zshrc.local

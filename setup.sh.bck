@@ -32,7 +32,7 @@ if [ "$IGNORE_NIX" = false ]; then
       IN_CONTAINER=true
     fi
 
-    if [ "$OS" = "Darwin" ]; then
+if [ "$OS" = "Darwin" ]; then
       # macOS installation - always use multi-user install
       echo "Detected macOS - using multi-user installation"
       sh <(curl -L https://nixos.org/nix/install)

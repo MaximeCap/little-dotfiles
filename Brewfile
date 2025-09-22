@@ -1,3 +1,5 @@
 brew "eza"
+brew "fzf"
+brew "zoxide"
 brew "tmux"
 brew "starship"
