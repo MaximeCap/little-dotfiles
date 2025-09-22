@@ -1,3 +1,3 @@
-brew eza
-brew tmux
-brew starship
+brew "eza"
+brew "tmux"
+brew "starship"
