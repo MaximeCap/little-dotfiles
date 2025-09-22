@@ -33,9 +33,14 @@ echo "Symlinking the configuration files ..."
 # Backup the existing zshrc file if it exists
 [ -f "$HOME"/.zshrc ] && mv "$HOME"/.zshrc "$HOME"/.zshrc.bak
 
+ln -sf "$PWD/bash/"* "$HOME/.local/share/omarchy"
+
 ln -sf "$PWD"/.zshrc "$HOME"/.zshrc
 ln -sf "$PWD"/tmux.conf "$HOME"/.tmux.conf
 ln -sf "$PWD/nvim/"* "$XDG_CONFIG_HOME/nvim"
 ln -sf "$PWD/starship.toml" "$XDG_CONFIG_HOME/starship.toml"
 
 echo "Setup complete"
+
+echo "source ~/.local/share/omarchy/rc" >> "$HOME/.bashrc"
+
