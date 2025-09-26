@@ -27,8 +27,8 @@ function M.setup()
 	whichKey.setup()
 
 	-- vim.keymap.set("n", "<leader>?", whichKey.show({ global = false }))
-	vim.keymap.set("n", "<leader>ul", ":lua vim.o.background = \"light\"")
-	vim.keymap.set("n", "<leader>ud", ":lua vim.o.background = \"dark\"")
+	vim.keymap.set("n", "<leader>ul", ":lua vim.o.background = \"light\"<CR>")
+	vim.keymap.set("n", "<leader>ud", ":lua vim.o.background = \"dark\"<CR>")
 
 
 	--vim.o.background = theme
