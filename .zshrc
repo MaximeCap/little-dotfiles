@@ -68,12 +68,13 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/.nix-profile/bin:$PATH"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 export VISUAL=vi
 export EDITOR=vi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    export TERM=xterm-ghostty
+    export TERM=screen
 else
     export TERM=screen
 fi
@@ -84,9 +85,31 @@ export LC_ALL=en_US.UTF-8
 # alias
 alias k="kubectl"
 alias n="nvim"
-alias ll="ls -la"
-alias lg="lazygit"
 alias bvim="NVIM_APPNAME=mini-nvim nvim"
+
+alias ls='eza -lh --group-directories-first --icons=auto'
+alias lsa='ls -a'
+alias lt='eza --tree --level=2 --long --icons --git'
+alias lta='lt -a'
+alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+alias cd="zd"
+alias lg="lazygit"
+alias ll="lsa"
+
+zd() {
+  if [ $# -eq 0 ]; then
+    builtin cd ~ && return
+  elif [ -d "$1" ]; then
+    builtin cd "$1"
+  else
+    z "$@" && printf "\U000F17A9 " && pwd || echo "Error: Directory not found"
+  fi
+}
+
+# Directories
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 source ~/.zshrc.local
 
@@ -100,3 +123,4 @@ source ~/.zshrc.local
 
 # opencode
 export PATH=/Users/maxime.cappellen.e/.opencode/bin:$PATH
+export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
