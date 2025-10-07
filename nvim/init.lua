@@ -51,6 +51,10 @@ vim.pack.add({
 	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/folke/flash.nvim" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
+	{ src = "https://github.com/sschleemilch/slimline.nvim" },
+	{ src = "https://github.com/nvim-mini/mini.icons" },
+	{ src = "https://github.com/folke/tokyonight.nvim" },
+	{ src = "https://github.com/alexghergh/nvim-tmux-navigation" },
 	{ src = "https://github.com/pmizio/typescript-tools.nvim" }
 })
 

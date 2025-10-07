@@ -1,24 +1,42 @@
 local M = {}
 
 function M.setup()
+	require("tokyonight").setup {
+		style = "storm",
+		transparent = true,
+	}
 	require "gruvbox".setup {
 		terminal_colors = true,
 	}
 
-	require "lualine".setup({
-		sections = {
-			lualine_x = {
-				-- {
-				-- 	require "minuet.lualine",
-				-- 	display_name = 'provider',
-				-- 	display_on_idle = true
-				-- },
-				'encoding',
-				'fileformat',
-				'filetype'
-			}
-		}
-	})
+	require("mini.icons").setup {}
+	require("slimline").setup {}
+
+	-- require "lualine".setup({
+	-- 	sections = {
+	-- 		lualine_x = {
+	-- 			-- {
+	-- 			-- 	require "minuet.lualine",
+	-- 			-- 	display_name = 'provider',
+	-- 			-- 	display_on_idle = true
+	-- 			-- },
+	-- 			'encoding',
+	-- 			'fileformat',
+	-- 			'filetype'
+	-- 		}
+	-- 	}
+	-- })
+
+
+	local nvim_tmux_nav = require("nvim-tmux-navigation")
+	nvim_tmux_nav.setup {}
+
+	vim.keymap.set('n', "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+	vim.keymap.set('n', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+	vim.keymap.set('n', "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+	vim.keymap.set('n', "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+	vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+	vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
 
 	require("toggleterm").setup {}
 	require("flash").setup {}
@@ -33,7 +51,7 @@ function M.setup()
 
 	--vim.o.background = theme
 
-	vim.cmd("colorscheme gruvbox")
+	vim.cmd("colorscheme tokyonight")
 end
 
 return M
