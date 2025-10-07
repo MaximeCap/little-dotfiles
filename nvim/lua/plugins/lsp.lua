@@ -15,7 +15,6 @@ function M.setup()
 			"helm_ls",
 			"lua_ls",
 			"gopls",
-			"vtsls",
 			"tailwindcss",
 			"eslint",
 			"prettier"
@@ -70,32 +69,40 @@ function M.setup()
 
 	})
 
-	vim.lsp.config("vtsls", {
-		filetypes = {
-			"javascript",
-			"javascriptreact",
-			"javascript.jsx",
-			"typescript",
-			"typescriptreact",
-			"typescript.tsx",
-		},
+
+	require("typescript-tools").setup {
+		root_dir = require("lspconfig.util").root_pattern("package.json"),
 		settings = {
-			typescript = {
-				updateImportsOnFileMove = { enabled = "always" },
-				suggest = {
-					completeFunctionCalls = true,
-				},
-				inlayHints = {
-					enumMemberValues = { enabled = true },
-					functionLikeReturnTypes = { enabled = true },
-					parameterNames = { enabled = "literals" },
-					parameterTypes = { enabled = true },
-					propertyDeclarationTypes = { enabled = true },
-					variableTypes = { enabled = false },
-				},
-			},
+			tsserver_max_memory = "4096"
 		}
-	})
+	}
+
+	-- vim.lsp.config("vtsls", {
+	-- 	filetypes = {
+	-- 		"javascript",
+	-- 		"javascriptreact",
+	-- 		"javascript.jsx",
+	-- 		"typescript",
+	-- 		"typescriptreact",
+	-- 		"typescript.tsx",
+	-- 	},
+	-- 	settings = {
+	-- 		typescript = {
+	-- 			updateImportsOnFileMove = { enabled = "always" },
+	-- 			suggest = {
+	-- 				completeFunctionCalls = true,
+	-- 			},
+	-- 			inlayHints = {
+	-- 				enumMemberValues = { enabled = true },
+	-- 				functionLikeReturnTypes = { enabled = true },
+	-- 				parameterNames = { enabled = "literals" },
+	-- 				parameterTypes = { enabled = true },
+	-- 				propertyDeclarationTypes = { enabled = true },
+	-- 				variableTypes = { enabled = false },
+	-- 			},
+	-- 		},
+	-- 	}
+	-- })
 
 
 	vim.api.nvim_create_autocmd("LspAttach", {
@@ -168,7 +175,7 @@ function M.setup()
 			yaml = { "prettier" }
 		},
 		format_on_save = {
-			timeout_ms = 500,
+			timeout_ms = 2500,
 			lsp_format = "fallback"
 		}
 	})

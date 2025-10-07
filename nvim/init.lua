@@ -49,8 +49,9 @@ vim.pack.add({
 	{ src = "https://github.com/akinsho/toggleterm.nvim" },
 	{ src = "https://github.com/folke/todo-comments.nvim" },
 	{ src = "https://github.com/folke/which-key.nvim" },
-	{ src = "https://github.com/folke/flash.nvim" }
-
+	{ src = "https://github.com/folke/flash.nvim" },
+	{ src = "https://github.com/pmizio/typescript-tools.nvim" },
+	{ src = "https://github.com/nvim-mini/mini.files" }
 })
 
 require "nvim-autopairs".setup()
@@ -79,16 +80,18 @@ require "plugins.ui".setup()
 require "plugins.debug".setup()
 require "after"
 
-require "oil".setup {
-	view_options = {
-		show_hidden = true
-	}
-}
+-- require "oil".setup {
+-- 	view_options = {
+-- 		show_hidden = true
+-- 	}
+-- }
+local MiniFiles = require('mini.files')
+MiniFiles.setup {}
 
 map("n", "<leader>f", function() snacks.picker.smart() end)
 map("n", "<leader>/", function() snacks.picker.grep() end)
 map("n", "<leader><leader>", function() snacks.picker.smart() end)
-map("n", "<leader>e", ":Oil<CR>")
+map("n", "<leader>e", function() MiniFiles.open() end)
 map("n", "<leader>gg", function() snacks.lazygit() end)
 
 vim.cmd(":hi statusline guibg=NONE")
