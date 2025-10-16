@@ -85,16 +85,20 @@ require "plugins.debug".setup()
 require "after"
 
 
-require "oil".setup {
-	view_options = {
-		show_hidden = true
-	}
-}
+-- require "oil".setup {
+-- 	git = {
+-- 		enabled = false
+-- 	},
+-- 	view_options = {
+-- 		show_hidden = true,
+-- 		natural_order = "fast",
+-- 	}
+-- }
 
 map("n", "<leader>f", function() snacks.picker.smart() end)
 map("n", "<leader>/", function() snacks.picker.grep() end)
 map("n", "<leader><leader>", function() snacks.picker.smart() end)
-map("n", "<leader>e", "<CMD>Oil<CR>")
+map("n", "<leader>e", "<CMD>e .<CR>")
 map("n", "<leader>gg", function() snacks.lazygit() end)
 
 vim.cmd(":hi statusline guibg=NONE")

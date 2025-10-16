@@ -77,7 +77,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview "ls $LS_COLOR_FLAG \$realpat
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
-eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/max.omp.toml)"
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/bubble.omp.json)"
 eval "$(fnm env --use-on-cd --shell zsh)"
 
 # bun
@@ -92,6 +92,8 @@ export TERM=screen
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+
+eval "$(zoxide init zsh)"
 
 # alias
 alias k="kubectl"
@@ -143,3 +145,9 @@ fi
 # exec 2>&3 3>& --async-
 
 #zprof
+# opencode
+export PATH=/Users/maxime.cappellen.e/.opencode/bin:$PATH
+
+# bun completions
+[ -s "/Users/maxime.cappellen.e/.bun/_bun" ] && source "/Users/maxime.cappellen.e/.bun/_bun"
+[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases

@@ -2,11 +2,8 @@ local M = {}
 
 function M.setup()
 	require("tokyonight").setup {
-		style = "storm",
-		transparent = true,
-	}
-	require "gruvbox".setup {
-		terminal_colors = true,
+		style = "night",
+		transparent = false,
 	}
 
 	require("mini.icons").setup {}
