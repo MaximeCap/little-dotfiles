@@ -2,14 +2,7 @@
 
 #zmodload zsh/zprof
 
-# Cross-platform Homebrew detection
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  if [ -x "/opt/homebrew/bin/brew" ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  fi
-elif [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 if [ -f "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then . "$HOME"/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
@@ -31,14 +24,9 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-# Load completions - optimized to run once per day
+# Load completions
 fpath=(~/.zsh/completions $fpath)
-autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+4) ]]; then
-  compinit
-else
-  compinit -C
-fi
+autoload -Uz compinit; compinit -C
 
 zinit cdreplay -q
 
@@ -64,19 +52,15 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Cross-platform ls color flag
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  LS_COLOR_FLAG="-G"
-else
-  LS_COLOR_FLAG="--color"
-fi
-zstyle ':fzf-tab:complete:cd:*' fzf-preview "ls $LS_COLOR_FLAG \$realpath"
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview "ls $LS_COLOR_FLAG \$realpath"
+# Aliases
+alias ls='ls --color'
 
 # Shell integrations
 eval "$(fzf --zsh)"
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/max.omp.toml)"
 eval "$(fnm env --use-on-cd --shell zsh)"
 
@@ -88,7 +72,12 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 export VISUAL=vi
 export EDITOR=vi
-export TERM=screen
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export TERM=screen
+else
+    export TERM=screen
+fi
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -122,24 +111,18 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-# opencode - use $HOME instead of hardcoded path
-[ -d "$HOME/.opencode/bin" ] && export PATH="$HOME/.opencode/bin:$PATH"
-
-# PostgreSQL - cross-platform detection
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  [ -d "/opt/homebrew/opt/postgresql@18/bin" ] && export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
-elif [ -d "/usr/lib/postgresql/18/bin" ]; then
-  export PATH="/usr/lib/postgresql/18/bin:$PATH"
-fi
-
-# bun completions - use $BUN_INSTALL
-[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
-
-# Source local overrides
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+source ~/.zshrc.local
 
 # End timing
 # unsetopt XTRACE
 # exec 2>&3 3>& --async-
 
+
 #zprof
+# opencode
+export PATH=/Users/maxime.cappellen.e/.opencode/bin:$PATH
+export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
+eval "$(zoxide init zsh)"
+
+# bun completions
+[ -s "/Users/maxime.cappellen/.bun/_bun" ] && source "/Users/maxime.cappellen/.bun/_bun"

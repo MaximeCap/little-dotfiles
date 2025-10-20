@@ -13,7 +13,7 @@ if [ "$OS" = "Darwin" ]; then
 else
 	BREW_SHELL_ENV="/home/linuxbrew/.linuxbrew/bin/brew"
 fi
-echo "eval \"\$($BREW_SHELL_ENV shellenv)\"" >> "$HOME/.bashrc"
+echo "eval \"\$($BREW_SHELL_ENV shellenv)\"" >>"$HOME/.bashrc"
 eval "$($BREW_SHELL_ENV shellenv)"
 
 brew bundle check || brew bundle install
@@ -40,8 +40,8 @@ ln -sf "$PWD"/.zshrc "$HOME"/.zshrc
 ln -sf "$PWD"/tmux.conf "$HOME"/.tmux.conf
 ln -sf "$PWD/nvim/"* "$XDG_CONFIG_HOME/nvim"
 ln -sf "$PWD/starship.toml" "$XDG_CONFIG_HOME/starship.toml"
+ln -sf "$PWD/kubectl_aliases.txt" "$HOME/.kubectl_aliases"
 
 echo "Setup complete"
 
-echo "source ~/.local/share/omarchy/rc.sh" >> "$HOME/.bashrc"
-
+echo "source ~/.local/share/omarchy/rc.sh" >>"$HOME/.bashrc"
