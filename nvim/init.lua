@@ -1,4 +1,3 @@
-vim.opt.winborder = "rounded"
 vim.opt.signcolumn = "yes"
 vim.opt.cursorcolumn = false
 vim.opt.ignorecase = true
@@ -27,6 +26,7 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.cmp",                         version = "v1.6.0" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/milanglacier/minuet-ai.nvim" },
+	{ src = "https://github.com/windwp/nvim-ts-autotag" },
 	-- Debug region
 	{ src = "https://github.com/nvim-neotest/nvim-nio" },
 	{ src = "https://github.com/rcarriga/nvim-dap-ui" },

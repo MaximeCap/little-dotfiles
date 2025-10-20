@@ -2,7 +2,6 @@ local M = {}
 
 function M.setup()
 	require "fidget".setup()
-
 	-- Install LSP
 	require "mason".setup()
 	require "mason-lspconfig".setup {}
@@ -76,33 +75,7 @@ function M.setup()
 			tsserver_max_memory = "4096"
 		}
 	}
-
-	-- vim.lsp.config("vtsls", {
-	-- 	filetypes = {
-	-- 		"javascript",
-	-- 		"javascriptreact",
-	-- 		"javascript.jsx",
-	-- 		"typescript",
-	-- 		"typescriptreact",
-	-- 		"typescript.tsx",
-	-- 	},
-	-- 	settings = {
-	-- 		typescript = {
-	-- 			updateImportsOnFileMove = { enabled = "always" },
-	-- 			suggest = {
-	-- 				completeFunctionCalls = true,
-	-- 			},
-	-- 			inlayHints = {
-	-- 				enumMemberValues = { enabled = true },
-	-- 				functionLikeReturnTypes = { enabled = true },
-	-- 				parameterNames = { enabled = "literals" },
-	-- 				parameterTypes = { enabled = true },
-	-- 				propertyDeclarationTypes = { enabled = true },
-	-- 				variableTypes = { enabled = false },
-	-- 			},
-	-- 		},
-	-- 	}
-	-- })
+	require('nvim-ts-autotag').setup {}
 
 
 	vim.api.nvim_create_autocmd("LspAttach", {
@@ -146,7 +119,7 @@ function M.setup()
 
 	require 'blink.cmp'.setup({
 		keymap = {
-			['<A-y>'] = require "minuet".make_blink_map()
+			['<A-y>'] = require "minuet".make_blink_map(),
 		},
 		sources = {
 			default = { 'lsp', 'path', 'buffer', 'snippets' },

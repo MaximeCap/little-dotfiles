@@ -10,7 +10,11 @@ function M.setup()
 	}
 
 	require("mini.icons").setup {}
-	require("slimline").setup {}
+	require("slimline").setup {
+		components_inactive = {
+			left = { 'path' },
+		}
+	}
 
 	-- require "lualine".setup({
 	-- 	sections = {
