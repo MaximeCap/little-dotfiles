@@ -77,8 +77,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview "ls $LS_COLOR_FLAG \$realpat
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
-eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/max.omp.toml)"
-eval "$(fnm env --use-on-cd --shell zsh)"
+eval "$(starship init zsh)"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
