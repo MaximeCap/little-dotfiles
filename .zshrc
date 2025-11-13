@@ -121,6 +121,8 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
+
 # opencode - use $HOME instead of hardcoded path
 [ -d "$HOME/.opencode/bin" ] && export PATH="$HOME/.opencode/bin:$PATH"
 
@@ -142,3 +144,4 @@ fi
 # exec 2>&3 3>& --async-
 
 #zprof
+export PATH="$HOME/.local/bin:$PATH"
