@@ -95,7 +95,7 @@ export LC_ALL=en_US.UTF-8
 # alias
 alias k="kubectl"
 alias n="nvim"
-alias bvim="NVIM_APPNAME=mini-nvim nvim"
+# alias bvim="NVIM_APPNAME=mini-nvim nvim"
 
 alias ls='eza -lh --group-directories-first --icons=auto'
 alias lsa='ls -a'
@@ -105,6 +105,11 @@ alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 alias cd="zd"
 alias lg="lazygit"
 alias ll="lsa"
+alias gsw="git switch"
+alias gs="git status"
+alias gcm="git commit -m"
+
+alias n11="NVIM_APPNAME=nvim11 nvim"
 
 zd() {
   if [ $# -eq 0 ]; then
