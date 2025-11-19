@@ -1,7 +1,6 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"folke/snacks.nvim",
 			"mason-org/mason.nvim",
@@ -23,7 +22,7 @@ return {
 					"prettierd",
 				},
 				auto_update = false,
-				run_on_start = false,
+				run_on_start = true,
 			})
 
 			vim.api.nvim_create_autocmd("LspAttach", {

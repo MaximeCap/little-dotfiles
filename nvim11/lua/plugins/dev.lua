@@ -10,5 +10,17 @@ return {
 			},
 		},
 	},
+	{
+		"akinsho/toggleterm.nvim",
+		keys = {
+			{
+				"<leader>tt",
+				function()
+					require("toggleterm").toggle(nil, nil, "", "float")
+				end,
+				desc = "Toggle Floating term",
+			},
+		},
+		config = true,
+	},
 }
-
