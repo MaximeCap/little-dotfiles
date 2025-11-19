@@ -1,5 +1,4 @@
 vim.g.mapleader = " " -- space leader key
-vim.o.mouse = "" -- disable mouse in nvim
 
 vim.o.termguicolors = true -- enable 24-bit colors
 vim.o.updatetime = 200 -- save swap file with 200ms debouncing
@@ -35,3 +34,14 @@ vim.o.wrap = false -- disable wrapping
 vim.o.breakindent = true -- prevent line wrapping
 
 vim.diagnostic.config({ virtual_text = true }) -- inline diagnostics
+
+-- Add to your init.lua or options.lua
+vim.loader.enable() -- Enable bytecode cache (if not already)
+
+-- Disable unused providers
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+-- Disable unused built-in plugins
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

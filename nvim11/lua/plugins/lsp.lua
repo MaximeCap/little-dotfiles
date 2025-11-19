@@ -1,6 +1,7 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"folke/snacks.nvim",
 			"mason-org/mason.nvim",
@@ -18,12 +19,11 @@ return {
 					"tailwindcss-language-server",
 					"ts_ls",
 					"gopls",
-					"harper-ls",
 					"markdownlint-cli2",
 					"prettierd",
 				},
 				auto_update = false,
-				run_on_start = true,
+				run_on_start = false,
 			})
 
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -98,6 +98,7 @@ return {
 	},
 	{
 		"j-hui/fidget.nvim",
+		event = "LspAttach",
 		opts = {
 			-- options
 		},
