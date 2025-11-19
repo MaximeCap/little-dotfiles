@@ -1,6 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-lint",
+		event = { "BufReadPost", "BufNewFile", "BufWritePost" },
 		config = function()
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 				callback = function()
@@ -16,6 +17,8 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		cmd = "ConformInfo",
 		opts = {
 			format_on_save = {
 				timeout_ms = 5000,
@@ -41,6 +44,8 @@ return {
 	},
 	{
 		"windwp/nvim-ts-autotag",
+		event = "InsertEnter",
+		ft = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "xml" },
 		config = function()
 			require("nvim-ts-autotag").setup()
 		end,
