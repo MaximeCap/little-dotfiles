@@ -9,10 +9,12 @@ vim.o.relativenumber = true -- enable relative line numbers
 
 vim.o.completeopt = "menu,menuone,noselect,preview" -- omnicomplete options for popup menu
 vim.o.pumheight = 10 -- max height of completion menu
-vim.o.winborder = "rounded" -- rounded border
-vim.o.showmode = false -- disable showing mode below statusline
+vim.o.winborder = "solid" -- rounded border
+vim.o.showmode = true -- showing mode below statusline
 
+vim.o.ruler = true
 vim.o.cursorline = true -- enable cursor line
+vim.o.cursorcolumn = false -- enable cursor column
 vim.o.signcolumn = "yes" -- always show sign column
 vim.o.ignorecase = true -- case-insensitive search
 vim.o.smartcase = true -- until search pattern contains upper case characters

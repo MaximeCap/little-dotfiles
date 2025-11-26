@@ -1,16 +1,31 @@
 return {
 	{
-		"akinsho/toggleterm.nvim",
-		keys = {
-			{
-				"<leader>tt",
-				function()
-					require("toggleterm").toggle(nil, nil, "", "float")
-				end,
-				desc = "Toggle Floating term",
-			},
-		},
-		config = true,
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		---@module "ibl"
+		---@type ibl.config
+		opts = {},
+	},
+	{
+		"ingur/floatty.nvim",
+		config = function()
+			local term = require("floatty").setup({
+				window = {
+					row = function()
+						return vim.o.lines - 11
+					end,
+					width = 1.0,
+					height = 8,
+				},
+			})
+
+			vim.keymap.set("n", "<C-t>", function()
+				term.toggle()
+			end)
+			vim.keymap.set("t", "<C-t>", function()
+				term.toggle()
+			end)
+		end,
 	},
 	{
 		"echasnovski/mini.surround",

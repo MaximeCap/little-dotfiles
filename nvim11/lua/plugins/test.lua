@@ -53,7 +53,8 @@ return {
 					}),
 				},
 			}
-			require("neotest").setup(vim.tbl_deep_extend(opts, config))
+			-- vim.tbl_deep_extend(opts, config)
+			require("neotest").setup(config)
 		end,
 	},
 }
