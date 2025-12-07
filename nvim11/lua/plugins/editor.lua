@@ -1,5 +1,15 @@
 return {
 	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" }, -- if you use the mini.nvim suite
+		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
+		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+		---@module 'render-markdown'
+		---@type render.md.UserConfig
+		opts = {},
+		ft = { "markdown" },
+	},
+	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		---@module "ibl"
@@ -39,6 +49,9 @@ return {
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
+			snippets = {
+				preset = "luasnip",
+			},
 			sources = {
 				default = { "lsp", "path", "buffer", "snippets" },
 				per_filetype = {
@@ -200,10 +213,24 @@ return {
 	},
 	{
 		"L3MON4D3/LuaSnip",
-		event = "InsertEnter",
-		keys = function()
-			-- Disable default tab keybinding in LuaSnip
-			return {}
-		end,
+		lazy = true,
+		-- dependencies = { "rafamadriz/friendly-snippets" },
+		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		-- install jsregexp (optional!).
+		dependencies = {
+			{
+				"rafamadriz/friendly-snippets",
+				config = function()
+					require("luasnip.loaders.from_vscode").lazy_load()
+					require("luasnip.loaders.from_vscode").lazy_load({
+						paths = { vim.fn.stdpath("config") .. "/snippets" },
+					})
+				end,
+			},
+		},
+		opts = {
+			history = true,
+			delete_check_events = "TextChanged",
+		},
 	},
 }

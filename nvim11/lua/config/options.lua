@@ -9,7 +9,7 @@ vim.o.relativenumber = true -- enable relative line numbers
 
 vim.o.completeopt = "menu,menuone,noselect,preview" -- omnicomplete options for popup menu
 vim.o.pumheight = 10 -- max height of completion menu
-vim.o.winborder = "solid" -- rounded border
+vim.o.winborder = "rounded" -- rounded border
 vim.o.showmode = true -- showing mode below statusline
 
 vim.o.ruler = true

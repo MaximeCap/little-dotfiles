@@ -1,4 +1,14 @@
 return {
+	-- tsc.lua
+	{
+		"dmmulroy/tsc.nvim",
+		config = true,
+	},
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {},
+	},
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -16,10 +26,10 @@ return {
 					"stylua",
 					"lua_ls",
 					"tailwindcss-language-server",
-					"ts_ls",
 					"gopls",
 					"markdownlint-cli2",
 					"prettierd",
+					"prettier",
 				},
 				auto_update = false,
 				run_on_start = true,

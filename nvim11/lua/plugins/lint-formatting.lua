@@ -20,8 +20,16 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		cmd = "ConformInfo",
 		opts = {
+			["markdownlint-cli2"] = {
+				condition = function(_, ctx)
+					local diag = vim.tbl_filter(function(d)
+						return d.source == "markdownlint"
+					end, vim.diagnostic.get(ctx.buf))
+					return #diag > 0
+				end,
+			},
 			format_on_save = {
-				timeout_ms = 5000,
+				timeout_ms = 300,
 				lsp_format = "fallback",
 			},
 			formatters_by_ft = {
@@ -33,7 +41,7 @@ return {
 				graphql = { "prettierd", "prettier", stop_after_first = true },
 				sql = { "sql_formatter" },
 				go = { "goimports", "gofmt" },
-				markdown = { "markdownlint-cli2" },
+				markdown = { "prettierd", "prettier", "markdownlint-cli2" },
 			},
 		},
 	},
