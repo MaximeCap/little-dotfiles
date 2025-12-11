@@ -32,7 +32,7 @@ vim.o.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
 vim.o.splitbelow = true -- better splitting
 vim.o.splitright = true -- better splitting
 
-vim.o.wrap = false -- disable wrapping
+vim.o.wrap = true -- enable wrapping
 vim.o.breakindent = true -- prevent line wrapping
 
 vim.diagnostic.config({ virtual_text = true }) -- inline diagnostics

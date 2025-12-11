@@ -233,4 +233,20 @@ return {
 			delete_check_events = "TextChanged",
 		},
 	},
+	{
+		"chentoast/marks.nvim",
+		event = "VeryLazy",
+		opts = {},
+	},
+	{
+		"smjonas/inc-rename.nvim",
+		opts = {},
+		keys = {
+			{
+				"<leader>rn",
+				":IncRename ",
+				desc = "IncRename",
+			},
+		},
+	},
 }

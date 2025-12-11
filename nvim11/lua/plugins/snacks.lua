@@ -27,6 +27,12 @@ return {
 				require("snacks").lazygit()
 			end,
 		},
+		{
+			"<leader>m",
+			function()
+				require("snacks").picker.marks()
+			end,
+		},
 	},
 	opts = {
 		picker = { enable = true },
