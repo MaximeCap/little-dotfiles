@@ -5,6 +5,7 @@ return {
 		"nvim-neotest/nvim-nio",
 		"jay-babu/mason-nvim-dap.nvim",
 		"theHamsta/nvim-dap-virtual-text",
+		"leoluz/nvim-dap-go",
 	},
   -- stylua: ignore
   keys = {
@@ -33,7 +34,7 @@ return {
 		local ui = require("dapui")
 		local dap_virtual_text = require("nvim-dap-virtual-text")
 
-		--require("dap-go").setup()
+		require("dap-go").setup()
 
 		dap_virtual_text.setup({})
 		mason_dap.setup({

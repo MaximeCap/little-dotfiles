@@ -5,6 +5,10 @@ return {
 		config = true,
 	},
 	{
+		"dmmulroy/ts-error-translator.nvim",
+		config = true,
+	},
+	{
 		"pmizio/typescript-tools.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		opts = {},
@@ -30,6 +34,8 @@ return {
 					"markdownlint-cli2",
 					"prettierd",
 					"prettier",
+					"pylsp",
+					"ruff",
 				},
 				auto_update = false,
 				run_on_start = true,

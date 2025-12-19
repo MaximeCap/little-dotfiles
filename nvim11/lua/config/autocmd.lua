@@ -120,6 +120,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.treesitter.start()
 		-- folds, provided by Neovim
 		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+		vim.wo.foldmethod = "expr"
+		vim.wo.foldenable = false
 		-- indentation, provided by nvim-treesitter
 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 	end,

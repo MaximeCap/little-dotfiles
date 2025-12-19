@@ -1,5 +1,34 @@
 return {
 	{
+		"olimorris/codecompanion.nvim",
+		version = "^18.0.0",
+		opts = {
+			interactions = {
+				chat = {
+					adapter = "ollama",
+				},
+				inline = {
+					adapter = "ollama",
+				},
+			},
+			adapters = {
+				http = {
+					ollama = function()
+						return require("codecompanion.adapters").extend("ollama", {
+							env = {
+								url = "http://localhost:11434",
+							},
+						})
+					end,
+				},
+			},
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+	},
+	{
 		"milanglacier/minuet-ai.nvim",
 		keys = {
 			{
