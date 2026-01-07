@@ -1,20 +1,6 @@
 return {
 	{
-		"A7Lavinraj/fyler.nvim",
-		dependencies = { "nvim-mini/mini.icons" },
-		branch = "stable", -- Use stable branch for production
-		opts = {},
-		keys = {
-			{
-				"<leader>e",
-				"<cmd>Fyler kind=float<cr>",
-				desc = "Open file tree",
-			},
-		},
-	},
-	{
 		"stevearc/oil.nvim",
-		enabled = false,
 		cmd = "Oil",
 		keys = {
 			{ "<leader>e", "<cmd>Oil<cr>" },

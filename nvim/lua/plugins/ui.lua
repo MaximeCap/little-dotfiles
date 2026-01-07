@@ -1,61 +1,146 @@
-local M = {}
-
-function M.setup()
-	require("tokyonight").setup {
-		style = "storm",
-		transparent = true,
-	}
-	require "gruvbox".setup {
-		terminal_colors = true,
-	}
-
-	require("mini.icons").setup {}
-	require("slimline").setup {
-		components_inactive = {
-			left = { 'path' },
-		}
-	}
-
-	-- require "lualine".setup({
-	-- 	sections = {
-	-- 		lualine_x = {
-	-- 			-- {
-	-- 			-- 	require "minuet.lualine",
-	-- 			-- 	display_name = 'provider',
-	-- 			-- 	display_on_idle = true
-	-- 			-- },
-	-- 			'encoding',
-	-- 			'fileformat',
-	-- 			'filetype'
-	-- 		}
-	-- 	}
-	-- })
-
-
-	local nvim_tmux_nav = require("nvim-tmux-navigation")
-	nvim_tmux_nav.setup {}
-
-	vim.keymap.set('n', "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
-	vim.keymap.set('n', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
-	vim.keymap.set('n', "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
-	vim.keymap.set('n', "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
-	vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
-	vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
-
-	require("toggleterm").setup {}
-	require("flash").setup {}
-	require("todo-comments").setup {}
-	local whichKey = require("which-key")
-	whichKey.setup()
-
-	-- vim.keymap.set("n", "<leader>?", whichKey.show({ global = false }))
-	vim.keymap.set("n", "<leader>ul", ":lua vim.o.background = \"light\"<CR>")
-	vim.keymap.set("n", "<leader>ud", ":lua vim.o.background = \"dark\"<CR>")
-
-
-	--vim.o.background = theme
-
-	vim.cmd("colorscheme tokyonight")
-end
-
-return M
+return {
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		enabled = true,
+		priority = 1000,
+		config = function()
+			vim.cmd("colorscheme rose-pine")
+		end,
+	},
+	-- Lua
+	{
+		"f-person/auto-dark-mode.nvim",
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+	},
+	{
+		-- undo-glow.lua
+		"y3owk1n/undo-glow.nvim",
+		version = "*", -- remove this if you want to use the `main` branch
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+			animation = {
+				enabled = true, -- whether to turn on or off for animation
+				duration = 400, -- in ms
+				animation_type = "fade", -- default to "fade", see more at animation section on how to change or create your own
+				fps = 120, -- change the fps, normally either 60 / 120, but it can be whatever number
+				easing = "in_out_cubic",
+				window_scoped = true,
+			},
+		},
+		keys = {
+			{
+				"u",
+				function()
+					require("undo-glow").undo()
+				end,
+				mode = "n",
+				desc = "Undo with highlight",
+				noremap = true,
+			},
+			{
+				"U",
+				function()
+					require("undo-glow").redo()
+				end,
+				mode = "n",
+				desc = "Redo with highlight",
+				noremap = true,
+			},
+			{
+				"p",
+				function()
+					require("undo-glow").paste_below()
+				end,
+				mode = "n",
+				desc = "Paste below with highlight",
+				noremap = true,
+			},
+			{
+				"P",
+				function()
+					require("undo-glow").paste_above()
+				end,
+				mode = "n",
+				desc = "Paste above with highlight",
+				noremap = true,
+			},
+			{
+				"n",
+				function()
+					require("undo-glow").search_next({
+						animation = {
+							animation_type = "strobe",
+						},
+					})
+				end,
+				mode = "n",
+				desc = "Search next with highlight",
+				noremap = true,
+			},
+			{
+				"N",
+				function()
+					require("undo-glow").search_prev({
+						animation = {
+							animation_type = "strobe",
+						},
+					})
+				end,
+				mode = "n",
+				desc = "Search prev with highlight",
+				noremap = true,
+			},
+			{
+				"*",
+				function()
+					require("undo-glow").search_star({
+						animation = {
+							animation_type = "strobe",
+						},
+					})
+				end,
+				mode = "n",
+				desc = "Search star with highlight",
+				noremap = true,
+			},
+			{
+				"#",
+				function()
+					require("undo-glow").search_hash({
+						animation = {
+							animation_type = "strobe",
+						},
+					})
+				end,
+				mode = "n",
+				desc = "Search hash with highlight",
+				noremap = true,
+			},
+		},
+	},
+	{
+		"christoomey/vim-tmux-navigator",
+		cmd = {
+			"TmuxNavigateLeft",
+			"TmuxNavigateDown",
+			"TmuxNavigateUp",
+			"TmuxNavigateRight",
+			"TmuxNavigatePrevious",
+			"TmuxNavigatorProcessList",
+		},
+		keys = {
+			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+		},
+	},
+}

@@ -6,7 +6,6 @@ local ts_ensure_installed = {
 	"javascript",
 	"jsdoc",
 	"json",
-	"jsonc",
 	"lua",
 	"luadoc",
 	"luap",
