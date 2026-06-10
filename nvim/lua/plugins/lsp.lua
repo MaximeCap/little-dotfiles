@@ -1,115 +1,87 @@
-return {
-	-- tsc.lua
-	{
-		"dmmulroy/tsc.nvim",
-		config = true,
-	},
-	{
-		"dmmulroy/ts-error-translator.nvim",
-		config = true,
-	},
-	{
-		"pmizio/typescript-tools.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		opts = {},
-	},
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			"folke/snacks.nvim",
-			"mason-org/mason.nvim",
-			"mason-org/mason-lspconfig.nvim",
-			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			"nvim-lua/plenary.nvim",
-		},
-		config = function()
-			require("mason").setup()
-			require("mason-lspconfig").setup()
-			require("mason-tool-installer").setup({
-				ensure_installed = {
-					"stylua",
-					"lua_ls",
-					"tailwindcss-language-server",
-					"gopls",
-					"markdownlint-cli2",
-					"prettierd",
-					"prettier",
-					"pyright",
-					"ruff",
-					"debugpy",
-				},
-				auto_update = false,
-				run_on_start = true,
-			})
+local ensure = require("config.lazy").loader({
+  "https://github.com/mason-org/mason.nvim",
+  "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
+  "https://github.com/mason-org/mason-lspconfig.nvim",
+  "https://github.com/neovim/nvim-lspconfig",
+  "https://github.com/j-hui/fidget.nvim",
+}, function()
+  require("fidget").setup {}
 
-			vim.api.nvim_create_autocmd("LspAttach", {
-				callback = function(ev)
-					local Snacks = require("snacks")
-					vim.keymap.set("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>", { desc = "Code actions" })
-					vim.keymap.set("n", "<leader>cr", ":lua vim.lsp.buf.rename()<CR>", { desc = "Rename" })
-					vim.keymap.set("n", "gd", function()
-						Snacks.picker.lsp_definitions()
-					end, { desc = "Goto Definition" })
-					vim.keymap.set("n", "gD", function()
-						Snacks.picker.lsp_declarations()
-					end, { desc = "Goto Declaration" })
-					vim.keymap.set("n", "gr", function()
-						Snacks.picker.lsp_references()
-					end, { nowait = true, desc = "References" })
-					vim.keymap.set("n", "gI", function()
-						Snacks.picker.lsp_implementations()
-					end, { desc = "Goto Implementation" })
-					vim.keymap.set("n", "gy", function()
-						Snacks.picker.lsp_type_definitions()
-					end, { desc = "Goto T[y]pe Definition" })
-					vim.keymap.set("n", "<leader>ss", function()
-						Snacks.picker.lsp_symbols()
-					end, { desc = "LSP Symbols" })
-					vim.keymap.set("n", "<leader>sS", function()
-						Snacks.picker.lsp_workspace_symbols()
-					end, { desc = "LSP Workspace Symbols" })
+  local servers = {
+    -- Language
+    "lua_ls",
+    "gopls",
+    "vtsls",
+    "tailwindcss",
+    "basedpyright",
+    "docker_language_server",
+    -- Lint
+    "eslint",
+    "sqlfluff",
+    -- Formatter
+    "biome",
+    "stylua",
+    "ruff",
+    "prettier",
+    "goimports",
+    "sqlfmt",
+    -- dap
+    "delve",
+    "debugpy",
+  }
 
-					vim.keymap.set("n", "gK", function()
-						local new_config = not vim.diagnostic.config().virtual_lines
-						vim.diagnostic.config({ virtual_lines = new_config })
-					end, { desc = "Toggle diagnostic virtual_lines" })
+  require("mason").setup {}
+  require("mason-lspconfig").setup {
+    automatic_enable = true,
+  }
+  require("mason-tool-installer").setup {
+    ensure_installed = servers,
+  }
 
-					local client = vim.lsp.get_client_by_id(ev.data.client_id)
+  -- Advertise blink.cmp's richer completion capabilities to every LSP server.
+  local ok_blink, blink = pcall(require, "blink.cmp")
+  if ok_blink then
+    vim.lsp.config("*", { capabilities = blink.get_lsp_capabilities() })
+  end
 
-					-- No need if we use Blink.cmp
-					-- if client ~= nil and client:supports_method('textDocument/completion') then
-					-- 	vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-					-- end
+  vim.lsp.inlay_hint.enable()
+end)
 
-					if client ~= nil and client:supports_method("textDocument/inlayHint") then
-						vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
-					end
-
-					if client ~= nil and client.id == "helm_ls" then
-						require("helm-ls").setup()
-					end
-
-					vim.keymap.set("n", "<leader>ch", function()
-						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-						print("Inlay hints : " .. tostring(vim.lsp.inlay_hint.is_enabled()))
-					end)
-				end,
-			})
-
-			vim.api.nvim_create_autocmd("LspProgress", {
-				---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-				callback = function(ev)
-					local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-					vim.notify(vim.lsp.status(), vim.log.levels.INFO, {
-						id = "lsp_progress",
-						msg = ev.data.params.value.message,
-						opts = function(notif)
-							notif.icon = ev.data.params.value.kind == "end" and " "
-								or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-						end,
-					})
-				end,
-			})
-		end,
-	},
+-- Diagnostic styling is cheap and doesn't pull plugins — set it up front
+-- so messages render correctly the moment any LSP server attaches.
+vim.diagnostic.config {
+  severity_sort = true,
+  update_in_insert = true,
+  underline = true,
+  float = {
+    border = "rounded",
+    source = "if_many",
+    header = "",
+    prefix = "",
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticWarn",
+      [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+      [vim.diagnostic.severity.HINT] = "DiagnosticHint",
+    },
+  },
+  virtual_text = {
+    spacing = 2,
+    source = "if_many",
+    prefix = "●",
+  },
 }
+
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup("lazy_lsp", { clear = true }),
+  once = true,
+  callback = ensure,
+})

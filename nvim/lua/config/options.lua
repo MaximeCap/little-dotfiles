@@ -1,49 +1,42 @@
-vim.g.mapleader = " " -- space leader key
+local o = vim.o
+o.number = true
+o.relativenumber = true
+o.autoindent = true -- Enable auto indentation
+o.expandtab = true -- Use spaces instead of tabs
+o.tabstop = 2 -- Number of spaces for a tab
+o.softtabstop = 2 -- Number of spaces for a tab when editing
+o.shiftwidth = 2 -- Number of spaces for autoindent
+o.conceallevel = 2
+o.termguicolors = true
+o.undofile = true
+o.swapfile = false
+o.completeopt = "menuone,noselect,fuzzy,popup"
+o.winborder = "rounded"
+o.ignorecase = true
+o.smartcase = true -- case-sensitive search if an uppercase char is typed
+o.cmdheight = 1
 
-vim.o.termguicolors = true -- enable 24-bit colors
-vim.o.updatetime = 200 -- save swap file with 200ms debouncing
-vim.o.autoread = true -- auto update file if changed outside of nvim
-vim.o.undofile = true -- persistant undo history
-vim.o.number = true -- enable line numbers
-vim.o.relativenumber = true -- enable relative line numbers
+-- TODO see the effect
+o.cursorlineopt = "both" -- to enable cursorline!
+o.inccommand = "split"
+o.cursorline = true
+o.textwidth = 100
+-- o.listchars = "tab: ,multispace:|   ,space:·"
+-- o.list = true
+o.clipboard = "unnamedplus"
 
-vim.o.completeopt = "menu,menuone,noselect,preview" -- omnicomplete options for popup menu
-vim.o.pumheight = 10 -- max height of completion menu
-vim.o.winborder = "rounded" -- rounded border
-vim.o.showmode = true -- showing mode below statusline
-
-vim.o.ruler = true
-vim.o.cursorline = true -- enable cursor line
-vim.o.cursorcolumn = false -- enable cursor column
-vim.o.signcolumn = "yes" -- always show sign column
-vim.o.ignorecase = true -- case-insensitive search
-vim.o.smartcase = true -- until search pattern contains upper case characters
-vim.o.incsearch = true -- enable highlighting search in progress
-
-vim.o.tabstop = 2 -- how many spaces tab inserts
-vim.o.softtabstop = 2 -- how many spaces tab inserts
-vim.o.shiftwidth = 2 -- controls number of spaces when using >> or << commands
-vim.o.expandtab = true -- use appropriate number of spaces with tab
-vim.o.smartindent = true -- indenting correctly after {
-vim.o.autoindent = true -- copy indent from current line when starting new line
-vim.o.scrolloff = 8 -- always keep 8 lines above/below cursor unless at start/end of file
-vim.o.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
-
-vim.o.splitbelow = true -- better splitting
-vim.o.splitright = true -- better splitting
-
-vim.o.wrap = true -- enable wrapping
-vim.o.breakindent = true -- prevent line wrapping
-
-vim.diagnostic.config({ virtual_text = true }) -- inline diagnostics
-
--- Add to your init.lua or options.lua
-vim.loader.enable() -- Enable bytecode cache (if not already)
-
--- Disable unused providers
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_ruby_provider = 0
-
--- Disable unused built-in plugins
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- QoL
+o.scrolloff = 8 -- keep 8 lines visible around the cursor
+o.sidescrolloff = 8
+o.signcolumn = "yes" -- always show the sign column (prevents text jitter)
+o.splitright = true -- vertical splits open to the right
+o.splitbelow = true -- horizontal splits open below
+o.smoothscroll = true -- wrap-aware scrolling for <C-d>/<C-u> (0.10+)
+o.wrap = false
+o.linebreak = true -- if wrap is toggled on, break at word boundaries
+o.breakindent = true -- wrapped lines preserve indentation
+o.confirm = true -- prompt to save instead of failing on :q with unsaved changes
+o.updatetime = 250 -- faster CursorHold & gitsigns blame
+o.timeoutlen = 400 -- snappier leader chords
+o.jumpoptions = "stack,view" -- saner jumplist behavior
+o.virtualedit = "block" -- free-form movement in visual-block mode

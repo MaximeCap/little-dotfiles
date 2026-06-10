@@ -1,67 +1,15 @@
-return {
-	{
-		"olimorris/codecompanion.nvim",
-		version = "^18.0.0",
-		opts = {
-			interactions = {
-				chat = {
-					adapter = "ollama",
-				},
-				inline = {
-					adapter = "ollama",
-				},
-			},
-			adapters = {
-				http = {
-					ollama = function()
-						return require("codecompanion.adapters").extend("ollama", {
-							env = {
-								url = "http://localhost:11434",
-							},
-						})
-					end,
-				},
-			},
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-	},
-	{
-		"milanglacier/minuet-ai.nvim",
-		keys = {
-			{
-				"<leader>at",
-				"<CMD>Minuet virtualtext toggle<CR>",
-				desc = "Toggle Minuet Virtualtext",
-			},
-		},
-		config = function()
-			require("minuet").setup({
-				auto_trigger_ft = { "*" },
-				provider = "openai_fim_compatible",
-				provider_options = {
-					openai_fim_compatible = {
-						model = "qwen2.5-coder:1.5b-base",
-						end_point = "http://localhost:11434/v1/completions",
-						name = "Qwen",
-						api_key = function()
-							return "text"
-						end,
-						stream = true,
-					},
-				},
-				virtualtext = {
-					show_on_completion_menu = true,
-					keymap = {
-						accept = "<A-y>",
-						accept_line = "<A-e>",
-						prev = "<A-[>",
-						next = "<A-]>",
-					},
-				},
-			})
-		end,
-	},
-}
+local ensure = require("config.lazy").loader(
+  { "https://github.com/carlos-algms/agentic.nvim" },
+  function()
+    require("agentic").setup {
+      provider = "codex-acp",
+    }
+  end
+)
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VeryLazy",
+  group = vim.api.nvim_create_augroup("lazy_agentic", { clear = true }),
+  once = true,
+  callback = ensure,
+})
