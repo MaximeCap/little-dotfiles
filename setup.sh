@@ -34,7 +34,7 @@ mkdir -p "$HOME/.local/share/omarchy"
 
 
 echo "Init ZSH"
-bash $PWD/zsh/zshrc-config.sh
+/bin/bash $PWD/zsh/zshrc-config.sh
 echo "ZSH done"
 
 # Create local .zshrc.local for fine tunning

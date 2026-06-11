@@ -11,7 +11,7 @@ if command -v hostnamectl >/dev/null 2>&1; then
   fi
 fi
 
-# Init create directory
+echo "Init create directory"
 if [ -d "$XDG_STATE_HOME/zsh" ]; then
   mkdir -p "$XDG_STATE_HOME/zsh"
 fi
