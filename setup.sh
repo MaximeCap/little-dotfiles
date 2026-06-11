@@ -30,6 +30,7 @@ brew bundle check || brew bundle install
 echo "Creating necessary folders"
 mkdir -p "$XDG_CONFIG_HOME"
 mkdir -p "$XDG_CONFIG_HOME/nvim"
+mkdir -p "$XDG_CONFIG_HOME/zsh"
 mkdir -p "$HOME/.local/share/omarchy"
 
 
