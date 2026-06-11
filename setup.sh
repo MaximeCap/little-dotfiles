@@ -32,7 +32,10 @@ mkdir -p "$XDG_CONFIG_HOME"
 mkdir -p "$XDG_CONFIG_HOME/nvim"
 mkdir -p "$HOME/.local/share/omarchy"
 
+
+echo "Init ZSH"
 bash $PWD/zsh/zshrc-config.sh
+echo "ZSH done"
 
 # Create local .zshrc.local for fine tunning
 [ -f "$HOME"/.zshrc.local ] || touch $HOME/.zshrc.local
