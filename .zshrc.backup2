@@ -74,6 +74,7 @@ fi
 zstyle ':fzf-tab:complete:cd:*' fzf-preview "ls $LS_COLOR_FLAG \$realpath"
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview "ls $LS_COLOR_FLAG \$realpath"
 
+
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
@@ -85,9 +86,14 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/.nix-profile/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 
-export VISUAL=vi
-export EDITOR=vi
+export VISUAL="/opt/homebrew/bin/nvim"
+export EDITOR="env NVIM_APPNAME=nvim11 /opt/homebrew/bin/nvim"
 export TERM=screen
+
+# Edit command with vim
+autoload -U edit-command-line
+zle -N edit-command-line 
+bindkey '\C-x\C-e' edit-command-line
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -109,8 +115,6 @@ alias gsw="git switch"
 alias gs="git status"
 alias gcm="git commit -m"
 
-alias n11="NVIM_APPNAME=nvim11 nvim"
-
 zd() {
   if [ $# -eq 0 ]; then
     builtin cd ~ && return
@@ -128,25 +132,5 @@ alias ....='cd ../../..'
 
 [ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
 
-# opencode - use $HOME instead of hardcoded path
-[ -d "$HOME/.opencode/bin" ] && export PATH="$HOME/.opencode/bin:$PATH"
-
-# PostgreSQL - cross-platform detection
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  [ -d "/opt/homebrew/opt/postgresql@18/bin" ] && export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
-elif [ -d "/usr/lib/postgresql/18/bin" ]; then
-  export PATH="/usr/lib/postgresql/18/bin:$PATH"
-fi
-
-# bun completions - use $BUN_INSTALL
-[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
-
 # Source local overrides
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-
-# End timing
-# unsetopt XTRACE
-# exec 2>&3 3>& --async-
-
-#zprof
-export PATH="$HOME/.local/bin:$PATH"

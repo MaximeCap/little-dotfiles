@@ -27,8 +27,9 @@ brew bundle check || brew bundle install
 echo "Creating necessary folders"
 mkdir -p "$XDG_CONFIG_HOME"
 mkdir -p "$XDG_CONFIG_HOME/nvim"
-# mkdir -p "$XDG_CONFIG_HOME/nvim11"
 mkdir -p "$HOME/.local/share/omarchy"
+
+./zshrc-config.sh
 
 # Create local .zshrc.local for fine tunning
 [ -f "$HOME"/.zshrc.local ] || touch $HOME/.zshrc.local
@@ -42,10 +43,10 @@ echo "Symlinking the configuration files ..."
 
 ln -sf "$PWD/bash/"* "$HOME/.local/share/omarchy"
 
-ln -sf "$PWD"/.zshrc "$HOME"/.zshrc
+# ln -sf "$PWD"/.zshrc "$HOME"/.zshrc
 ln -sf "$PWD"/tmux.conf "$HOME"/.tmux.conf
 ln -sf "$PWD/nvim/"* "$XDG_CONFIG_HOME/nvim"
-# ln -sf "$PWD/nvim11/"* "$XDG_CONFIG_HOME/nvim11"
+ln -sf "$PWD/zsh/"* "$XDG_CONFIG_HOME/zsh"
 ln -sf "$PWD/starship.toml" "$XDG_CONFIG_HOME/starship.toml"
 ln -sf "$PWD/kubectl_aliases.txt" "$HOME/.kubectl_aliases"
 
