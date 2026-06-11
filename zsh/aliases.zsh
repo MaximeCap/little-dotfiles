@@ -1,7 +1,8 @@
 alias zl="zoxide query -l | fzf"
+alias zd="zoxide"
 
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
-alias cd="zd"
+alias cd="z"
 
 alias gsw="git switch"
 alias gs="git status"
