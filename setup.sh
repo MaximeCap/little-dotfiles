@@ -50,7 +50,7 @@ echo "Symlinking the configuration files ..."
 
 ln -sf "$PWD/bash/"* "$HOME/.local/share/omarchy"
 
-# ln -sf "$PWD"/.zshrc "$HOME"/.zshrc
+ln -sf "$PWD"/zsh/.zshrc "$HOME"/.zshrc
 ln -sf "$PWD"/tmux.conf "$HOME"/.tmux.conf
 ln -sf "$PWD/nvim/"* "$XDG_CONFIG_HOME/nvim"
 ln -sf "$PWD/zsh/"* "$XDG_CONFIG_HOME/zsh"
